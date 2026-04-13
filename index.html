@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTIS — Orbital Thermal Intelligence Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Syne:wght@300;400;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #03050a;
+    --deep: #080d1a;
+    --panel: #0d1528;
+    --amber: #f5820a;
+    --amber-dim: #a85806;
+    --amber-glow: rgba(245,130,10,0.18);
+    --cyan: #1ae8d0;
+    --cyan-dim: rgba(26,232,208,0.15);
+    --text: #c8d8f0;
+    --muted: #5a7090;
+    --white: #eaf2ff;
+    --border: rgba(245,130,10,0.22);
+    --border-subtle: rgba(100,140,200,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed; width: 12px; height: 12px;
+    background: var(--amber); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform 0.08s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1.5px solid var(--amber); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform 0.18s cubic-bezier(.25,.8,.25,1), width 0.3s, height 0.3s;
+    opacity: 0.6;
+  }
+
+  /* STAR FIELD */
+  #starfield {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite alternate;
+    opacity: var(--op, 0.4);
+  }
+  @keyframes twinkle { to { opacity: 0.05; transform: scale(0.5); } }
+
+  /* GRID OVERLAY */
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(26,232,208,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,232,208,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: linear-gradient(180deg, rgba(3,5,10,0.98) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border-subtle);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900; font-size: 1.3rem;
+    color: var(--white); letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--amber); }
+
+  .nav-status {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem; color: var(--cyan); letter-spacing: 0.1em;
+  }
+  .nav-status::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: flex; flex-direction: column; gap: 5px;
+    cursor: none; background: none; border: none; padding: 8px;
+    z-index: 1001; position: relative;
+  }
+  .hamburger span {
+    display: block; height: 2px; background: var(--amber);
+    transition: all 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+    transform-origin: center;
+  }
+  .hamburger span:nth-child(1) { width: 28px; }
+  .hamburger span:nth-child(2) { width: 20px; }
+  .hamburger span:nth-child(3) { width: 24px; }
+  .hamburger.open span:nth-child(1) { width: 28px; transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { width: 28px; transform: translateY(-7px) rotate(-45deg); }
+
+  /* MENU OVERLAY */
+  .menu-overlay {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(3,5,10,0.97);
+    backdrop-filter: blur(20px);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-end;
+    padding-right: 8vw;
+    clip-path: circle(0% at calc(100% - 56px) 36px);
+    transition: clip-path 0.7s cubic-bezier(.77,0,.18,1);
+    pointer-events: none;
+  }
+  .menu-overlay.open {
+    clip-path: circle(150% at calc(100% - 56px) 36px);
+    pointer-events: all;
+  }
+
+  .menu-scanline {
+    position: absolute; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    animation: scanline 4s linear infinite; opacity: 0.3;
+  }
+  @keyframes scanline { 0%{top:0%} 100%{top:100%} }
+
+  .menu-links { display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem; }
+
+  .menu-link {
+    font-family: 'Orbitron', monospace; font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--muted); text-decoration: none;
+    letter-spacing: 0.05em;
+    display: flex; align-items: center; gap: 1rem;
+    transition: color 0.2s, transform 0.2s;
+    transform: translateX(80px); opacity: 0;
+    position: relative;
+  }
+  .menu-overlay.open .menu-link {
+    transform: translateX(0); opacity: 1;
+  }
+  .menu-overlay.open .menu-link:nth-child(1) { transition: color 0.2s, transform 0.5s 0.15s cubic-bezier(.77,0,.18,1), opacity 0.5s 0.15s; }
+  .menu-overlay.open .menu-link:nth-child(2) { transition: color 0.2s, transform 0.5s 0.22s cubic-bezier(.77,0,.18,1), opacity 0.5s 0.22s; }
+  .menu-overlay.open .menu-link:nth-child(3) { transition: color 0.2s, transform 0.5s 0.29s cubic-bezier(.77,0,.18,1), opacity 0.5s 0.29s; }
+  .menu-overlay.open .menu-link:nth-child(4) { transition: color 0.2s, transform 0.5s 0.36s cubic-bezier(.77,0,.18,1), opacity 0.5s 0.36s; }
+  .menu-overlay.open .menu-link:nth-child(5) { transition: color 0.2s, transform 0.5s 0.43s cubic-bezier(.77,0,.18,1), opacity 0.5s 0.43s; }
+  .menu-overlay.open .menu-link:nth-child(6) { transition: color 0.2s, transform 0.5s 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s 0.5s; }
+
+  .menu-link:hover { color: var(--white); transform: translateX(-8px) !important; }
+  .menu-link:hover .menu-link-num { color: var(--amber); }
+  .menu-link-num {
+    font-size: 0.7rem; color: var(--amber-dim);
+    font-weight: 400; letter-spacing: 0.2em;
+    transition: color 0.2s;
+    align-self: flex-start; margin-top: 0.5rem;
+  }
+
+  .menu-footer {
+    position: absolute; bottom: 2.5rem; left: 3rem;
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    color: var(--muted); letter-spacing: 0.15em;
+    opacity: 0; transition: opacity 0.5s 0.6s;
+  }
+  .menu-overlay.open .menu-footer { opacity: 1; }
+
+  /* SECTIONS */
+  section {
+    position: relative; z-index: 2;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  #hero {
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-start;
+    padding: 0 8vw;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.35em;
+    color: var(--amber); margin-bottom: 2.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; flex: 0 0 40px; height: 1px; background: var(--amber);
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    font-weight: 900; line-height: 0.9;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  .hero-title .line { display: block; overflow: hidden; }
+  .hero-title .line span {
+    display: block;
+    animation: slideUp 1s cubic-bezier(.77,0,.18,1) both;
+  }
+  .hero-title .line:nth-child(1) span { animation-delay: 0.1s; }
+  .hero-title .line:nth-child(2) span { animation-delay: 0.25s; }
+  .hero-title .line:nth-child(3) span { animation-delay: 0.4s; }
+  @keyframes slideUp { from{transform:translateY(110%)} to{transform:translateY(0)} }
+
+  .hero-title .accent { color: var(--amber); }
+  .hero-title .thin { font-weight: 400; color: var(--muted); font-size: 0.7em; }
+
+  .hero-sub {
+    font-size: 1.05rem; color: var(--text); max-width: 520px;
+    line-height: 1.75; margin-bottom: 3rem;
+    animation: fadeUp 1s 0.6s both;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
+
+  .hero-cta {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    animation: fadeUp 1s 0.8s both;
+  }
+
+  .btn-primary {
+    font-family: 'Orbitron', monospace; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 1rem 2.5rem; color: var(--void);
+    background: var(--amber); border: none;
+    cursor: none; text-decoration: none;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(245,130,10,0.5);
+  }
+
+  .btn-ghost {
+    font-family: 'Orbitron', monospace; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 1rem 2.5rem; color: var(--amber);
+    background: transparent;
+    border: 1px solid var(--border);
+    cursor: none; text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  }
+  .btn-ghost:hover { background: var(--amber-glow); border-color: var(--amber); }
+
+  /* HERO VISUAL */
+  .hero-orb {
+    position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);
+    width: min(45vw, 600px); height: min(45vw, 600px);
+    pointer-events: none;
+    animation: fadeUp 1.2s 0.3s both;
+  }
+  .hero-orb svg { width: 100%; height: 100%; }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 8vw;
+    font-family: 'Space Mono', monospace; font-size: 0.55rem;
+    letter-spacing: 0.25em; color: var(--muted);
+    display: flex; align-items: center; gap: 0.8rem;
+    animation: fadeUp 1s 1.2s both;
+  }
+  .hero-scroll::after {
+    content: ''; width: 40px; height: 1px; background: var(--muted);
+    animation: expand 2s ease-in-out infinite;
+  }
+  @keyframes expand { 0%,100%{width:40px} 50%{width:70px} }
+
+  /* SECTION STYLES */
+  .section-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 8rem 8vw;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.35em;
+    color: var(--amber); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: ''; flex: 0 0 30px; height: 1px; background: var(--amber);
+  }
+
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    color: var(--white); line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--deep); }
+
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1rem; line-height: 1.85; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border-subtle);
+    padding: 2rem 1.5rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .stat-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--amber), transparent);
+    transform: scaleX(0); transition: transform 0.4s;
+  }
+  .stat-card:hover::before { transform: scaleX(1); }
+  .stat-card:hover { border-color: var(--border); }
+  .stat-num {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 2.5rem; color: var(--amber);
+    display: block; margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-size: 0.75rem; color: var(--muted);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* TECHNOLOGY */
+  #technology { background: var(--void); }
+
+  .tech-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px; margin-top: 4rem;
+    background: var(--border-subtle);
+    border: 1px solid var(--border-subtle);
+  }
+
+  .tech-card {
+    background: var(--void);
+    padding: 2.5rem 2rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .tech-card::after {
+    content: ''; position: absolute;
+    inset: 0;
+    background: var(--amber-glow);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .tech-card:hover { background: var(--deep); }
+  .tech-card:hover::after { opacity: 1; }
+
+  .tech-icon {
+    font-size: 1.8rem; margin-bottom: 1.2rem;
+    display: block; position: relative; z-index: 1;
+  }
+  .tech-card-num {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    color: var(--amber-dim); letter-spacing: 0.2em;
+    margin-bottom: 0.8rem; display: block;
+    position: relative; z-index: 1;
+  }
+  .tech-card-title {
+    font-family: 'Orbitron', monospace; font-weight: 600;
+    font-size: 0.85rem; color: var(--white);
+    margin-bottom: 0.8rem; letter-spacing: 0.05em;
+    position: relative; z-index: 1;
+  }
+  .tech-card-desc {
+    font-size: 0.88rem; color: var(--muted);
+    line-height: 1.7; position: relative; z-index: 1;
+  }
+
+  /* ARCHITECTURE - STACK VISUAL */
+  #architecture { background: var(--deep); }
+
+  .arch-container {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+    margin-top: 3rem;
+  }
+
+  .stack-visual { display: flex; flex-direction: column; gap: 3px; }
+
+  .stack-layer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border-subtle);
+    background: var(--panel);
+    cursor: none;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .stack-layer::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--amber); transform: scaleY(0);
+    transition: transform 0.3s; transform-origin: bottom;
+  }
+  .stack-layer:hover { background: var(--deep); border-color: var(--border); padding-left: 2rem; }
+  .stack-layer:hover::before { transform: scaleY(1); }
+
+  .stack-layer-name {
+    font-family: 'Orbitron', monospace; font-size: 0.75rem;
+    color: var(--white); font-weight: 600; letter-spacing: 0.05em;
+  }
+  .stack-layer-type {
+    font-family: 'Space Mono', monospace; font-size: 0.58rem;
+    color: var(--amber); letter-spacing: 0.15em;
+  }
+
+  .arch-desc p {
+    font-size: 0.95rem; line-height: 1.85; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .arch-principle {
+    border-left: 2px solid var(--amber);
+    padding: 1rem 1.5rem;
+    background: var(--amber-glow);
+    font-style: italic; color: var(--white);
+    font-size: 0.95rem; line-height: 1.6;
+    margin: 2rem 0;
+  }
+
+  /* FOUNDERS */
+  #founders { background: var(--void); }
+
+  .founders-intro {
+    max-width: 600px; margin-bottom: 4rem;
+    font-size: 1rem; line-height: 1.8; color: var(--text);
+  }
+
+  .founders-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px; background: var(--border-subtle);
+  }
+
+  .founder-card {
+    background: var(--void); padding: 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+  .founder-card:hover { background: var(--deep); }
+
+  .founder-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 2px solid var(--border);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 1.5rem; color: var(--amber);
+    background: var(--panel);
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .founder-card:hover .founder-avatar { border-color: var(--amber); }
+
+  .founder-avatar::after {
+    content: ''; position: absolute;
+    inset: -2px; border-radius: 50%;
+    border: 2px solid var(--amber);
+    opacity: 0; animation: none;
+    transition: opacity 0.3s;
+  }
+  .founder-card:hover .founder-avatar::after {
+    opacity: 1;
+    animation: spin 3s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .founder-name {
+    font-family: 'Orbitron', monospace; font-weight: 700;
+    font-size: 1rem; color: var(--white);
+    margin-bottom: 0.3rem; letter-spacing: 0.05em;
+  }
+  .founder-role {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem;
+    color: var(--amber); letter-spacing: 0.2em;
+    text-transform: uppercase; margin-bottom: 1.2rem;
+    display: block;
+  }
+  .founder-bio {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.7;
+  }
+
+  .founder-tag {
+    display: inline-block; margin-top: 1rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border-subtle);
+    font-family: 'Space Mono', monospace; font-size: 0.55rem;
+    color: var(--cyan); letter-spacing: 0.1em;
+  }
+
+  /* PROBLEM / MISSION */
+  #mission { background: var(--deep); overflow: hidden; }
+
+  .mission-content {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 5rem;
+    align-items: start;
+  }
+
+  .mission-sidebar { position: sticky; top: 8rem; }
+
+  .mission-sidebar .section-label { margin-bottom: 2rem; }
+
+  .mission-items { display: flex; flex-direction: column; gap: 0; }
+
+  .mission-item {
+    border-top: 1px solid var(--border-subtle);
+    padding: 2rem 0;
+    display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
+    align-items: start;
+    cursor: none;
+    transition: padding-left 0.3s;
+  }
+  .mission-item:hover { padding-left: 1rem; }
+
+  .mission-item-icon {
+    font-size: 1.4rem; padding-top: 0.1rem;
+  }
+
+  .mission-item-title {
+    font-family: 'Orbitron', monospace; font-size: 0.8rem;
+    color: var(--white); font-weight: 600;
+    letter-spacing: 0.05em; margin-bottom: 0.6rem;
+  }
+  .mission-item-text {
+    font-size: 0.88rem; color: var(--muted); line-height: 1.7;
+  }
+
+  /* CONTACT */
+  #contact { background: var(--void); }
+
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+
+  .contact-blurb p {
+    font-size: 1rem; line-height: 1.85; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    color: var(--text); text-decoration: none;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-subtle);
+    padding: 1rem 1.5rem;
+    transition: border-color 0.2s, background 0.2s, color 0.2s;
+  }
+  .contact-link:hover {
+    border-color: var(--amber); background: var(--amber-glow); color: var(--white);
+  }
+  .contact-link-icon { font-size: 1.2rem; }
+  .contact-link-label { font-family: 'Space Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-field {
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .form-field label {
+    font-family: 'Space Mono', monospace; font-size: 0.58rem;
+    color: var(--amber); letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .form-field input,
+  .form-field textarea,
+  .form-field select {
+    background: var(--panel); border: 1px solid var(--border-subtle);
+    color: var(--white); padding: 0.9rem 1rem;
+    font-family: 'Syne', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus,
+  .form-field select:focus { border-color: var(--amber); }
+
+  .form-submit {
+    font-family: 'Orbitron', monospace; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 1.1rem 2rem; color: var(--void);
+    background: var(--amber); border: none;
+    cursor: none; margin-top: 0.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  }
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(245,130,10,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 2;
+    border-top: 1px solid var(--border-subtle);
+    background: var(--void);
+    padding: 2rem 8vw;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-brand {
+    font-family: 'Orbitron', monospace; font-weight: 900;
+    font-size: 0.9rem; color: var(--white); letter-spacing: 0.15em;
+  }
+  .footer-brand span { color: var(--amber); }
+  .footer-copy {
+    font-family: 'Space Mono', monospace; font-size: 0.55rem;
+    color: var(--muted); letter-spacing: 0.1em;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* DIVIDER */
+  .section-divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber-dim), transparent);
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .about-grid, .arch-container, .mission-content, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .mission-sidebar { position: static; }
+    .hero-orb { display: none; }
+    .hero-title { font-size: clamp(2.5rem, 12vw, 5rem); }
+    .section-inner { padding: 6rem 6vw; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div id="starfield"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">OT<span>I</span>S</a>
+  <div class="nav-status">SYSTEM NOMINAL · LEO READY</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-scanline"></div>
+  <nav class="menu-links">
+    <a href="#hero" class="menu-link" onclick="closeMenu()"><span class="menu-link-num">01</span>HOME</a>
+    <a href="#about" class="menu-link" onclick="closeMenu()"><span class="menu-link-num">02</span>ABOUT</a>
+    <a href="#technology" class="menu-link" onclick="closeMenu()"><span class="menu-link-num">03</span>TECHNOLOGY</a>
+    <a href="#architecture" class="menu-link" onclick="closeMenu()"><span class="menu-link-num">04</span>ARCHITECTURE</a>
+    <a href="#founders" class="menu-link" onclick="closeMenu()"><span class="menu-link-num">05</span>FOUNDERS</a>
+    <a href="#contact" class="menu-link" onclick="closeMenu()"><span class="menu-link-num">06</span>CONTACT</a>
+  </nav>
+  <div class="menu-footer">ORBITAL THERMAL INTELLIGENCE SYSTEMS © 2025</div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">ORBITAL THERMAL INTELLIGENCE SYSTEMS</div>
+  <h1 class="hero-title">
+    <span class="line"><span>AI THAT</span></span>
+    <span class="line"><span>SURVIVES <span class="accent">ORBIT.</span></span></span>
+    <span class="line"><span class="thin">DESIGNED FOR SPACE.</span></span>
+  </h1>
+  <p class="hero-sub">OTIS is the integration layer that makes onboard space AI real — combining thermal control, burst power, and radiation-aware fault handling into one flight-ready modular stack.</p>
+  <div class="hero-cta">
+    <a href="#about" class="btn-primary">EXPLORE SYSTEM</a>
+    <a href="#contact" class="btn-ghost">REQUEST BRIEF</a>
+  </div>
+  <div class="hero-scroll">SCROLL TO EXPLORE</div>
+
+  <div class="hero-orb">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="orbGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f5820a" stop-opacity="0.15"/>
+          <stop offset="60%" stop-color="#1ae8d0" stop-opacity="0.05"/>
+          <stop offset="100%" stop-color="#03050a" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f5820a" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#f5820a" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <!-- Outer rings -->
+      <circle cx="250" cy="250" r="230" fill="none" stroke="#1ae8d0" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.3">
+        <animateTransform attributeName="transform" type="rotate" from="0 250 250" to="360 250 250" dur="40s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="250" cy="250" r="195" fill="none" stroke="#f5820a" stroke-width="0.5" stroke-dasharray="2 12" opacity="0.4">
+        <animateTransform attributeName="transform" type="rotate" from="360 250 250" to="0 250 250" dur="28s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="250" cy="250" r="155" fill="none" stroke="#1ae8d0" stroke-width="1" stroke-dasharray="8 20" opacity="0.3">
+        <animateTransform attributeName="transform" type="rotate" from="0 250 250" to="360 250 250" dur="18s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Glow fill -->
+      <circle cx="250" cy="250" r="180" fill="url(#orbGrad)"/>
+      <!-- Core -->
+      <circle cx="250" cy="250" r="70" fill="url(#coreGrad)">
+        <animate attributeName="r" values="65;75;65" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="250" cy="250" r="45" fill="none" stroke="#f5820a" stroke-width="2" opacity="0.6">
+        <animate attributeName="r" values="40;50;40" dur="4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.6;0.2;0.6" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <!-- Satellite dot orbiting -->
+      <circle r="6" fill="#f5820a">
+        <animateMotion dur="8s" repeatCount="indefinite">
+          <mpath href="#orbit1"/>
+        </animateMotion>
+      </circle>
+      <path id="orbit1" d="M250,55 A195,195 0 1,1 249.9,55" fill="none"/>
+      <!-- Small dot 2 -->
+      <circle r="3" fill="#1ae8d0">
+        <animateMotion dur="14s" repeatCount="indefinite">
+          <mpath href="#orbit2"/>
+        </animateMotion>
+      </circle>
+      <path id="orbit2" d="M250,20 A230,230 0 1,0 249.9,20" fill="none"/>
+      <!-- Cross reticle -->
+      <line x1="230" y1="250" x2="270" y2="250" stroke="#f5820a" stroke-width="0.8" opacity="0.5"/>
+      <line x1="250" y1="230" x2="250" y2="270" stroke="#f5820a" stroke-width="0.8" opacity="0.5"/>
+      <!-- Corner marks -->
+      <g opacity="0.4" stroke="#1ae8d0" stroke-width="1" fill="none">
+        <path d="M80,80 L80,100 L100,100"/>
+        <path d="M420,80 L420,100 L400,100"/>
+        <path d="M80,420 L80,400 L100,400"/>
+        <path d="M420,420 L420,400 L400,400"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <div class="section-label">ABOUT OTIS</div>
+        <h2 class="section-title">The Gap Between<br><span style="color:var(--amber)">Earth AI</span> & Orbit</h2>
+        <p>Terrestrial AI systems depend on assumptions that simply don't hold in space. Fans, liquid cooling loops, and facility-scale power infrastructure — none of it exists 400 km up. In vacuum, heat can only be rejected by radiation. Power is intermittent. And ionizing radiation can flip bits, corrupt models, and trigger destructive failures.</p>
+        <p>Flying AI in space isn't just attaching a compute board to a bus. The real challenge is packaging compute into something lightweight, thermally credible, power-aware, and fault-tolerant enough for on-orbit use. <strong style="color:var(--white)">That's the gap OTIS is designed to close.</strong></p>
+        <a href="#technology" class="btn-ghost" style="display:inline-block;margin-top:1.5rem">SEE THE TECH</a>
+      </div>
+      <div class="about-stats reveal reveal-delay-2">
+        <div class="stat-card">
+          <span class="stat-num">7</span>
+          <span class="stat-label">Integrated Subsystems</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">1U+</span>
+          <span class="stat-label">CubeSat Compatible</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">0×</span>
+          <span class="stat-label">Redundant Cooling Loops</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">∞</span>
+          <span class="stat-label">Modular Configurations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" style="position:relative;z-index:2"></div>
+
+<!-- TECHNOLOGY -->
+<section id="technology">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">BUILDING BLOCKS</div>
+      <h2 class="section-title">Seven Layers.<br><span style="color:var(--amber)">One Stack.</span></h2>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card reveal reveal-delay-1">
+        <span class="tech-icon">🧠</span>
+        <span class="tech-card-num">LAYER 01</span>
+        <div class="tech-card-title">AI COMPUTE CARD</div>
+        <p class="tech-card-desc">Mission-specific NPU, FPGA, CPU, or heterogeneous processor — supplied by OTIS or by the customer. Optimized for inference per watt in harsh environments.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-2">
+        <span class="tech-icon">❄️</span>
+        <span class="tech-card-num">LAYER 02</span>
+        <div class="tech-card-title">COLD PLATE / VAPOR SPREADER</div>
+        <p class="tech-card-desc">Direct-to-chip thermal interface optimized for conduction into the spacecraft thermal path — no fans, no ambient air required.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-3">
+        <span class="tech-icon">⚡</span>
+        <span class="tech-card-num">LAYER 03</span>
+        <div class="tech-card-title">PCM BURST THERMAL BUFFER</div>
+        <p class="tech-card-desc">Phase-change material soaks short heat spikes, letting the radiator be sized around average load rather than worst-case instantaneous peaks.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-1">
+        <span class="tech-icon">🔥</span>
+        <span class="tech-card-num">LAYER 04</span>
+        <div class="tech-card-title">EMBEDDED FLAT HEAT PIPES</div>
+        <p class="tech-card-desc">Passive heat transport toward the panel — without the mass penalty or power draw of a large continuously-pumped loop.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-2">
+        <span class="tech-icon">🛰️</span>
+        <span class="tech-card-num">LAYER 05</span>
+        <div class="tech-card-title">STRUCTURAL RADIATOR PANEL</div>
+        <p class="tech-card-desc">Rejects heat while contributing mechanically. Low solar absorptivity, high emissivity surface treatments. Every kilogram earns its place.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-3">
+        <span class="tech-icon">🔋</span>
+        <span class="tech-card-num">LAYER 06</span>
+        <div class="tech-card-title">GaN PMAD + SUPERCAP CARTRIDGE</div>
+        <p class="tech-card-desc">Efficient GaN power electronics with removable supercapacitor burst storage. Reduces peak bus demand, supports AI inference spikes without oversizing the battery.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-1">
+        <span class="tech-icon">🛡️</span>
+        <span class="tech-card-num">LAYER 07</span>
+        <div class="tech-card-title">RADIATION-AWARE SUPERVISORY LAYER</div>
+        <p class="tech-card-desc">Fault detection, watchdog protection, event logging, selective reset, and graceful degradation. Keeps inference trustworthy in a radiation-prone environment.</p>
+      </div>
+      <div class="tech-card reveal reveal-delay-2">
+        <span class="tech-icon">💻</span>
+        <span class="tech-card-num">LAYER 08</span>
+        <div class="tech-card-title">POWER-THERMAL-RADIATION SOFTWARE</div>
+        <p class="tech-card-desc">Decides when to run high-power inference, when to cap clocks, when to checkpoint or reset — and when to defer lower-priority workloads.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" style="position:relative;z-index:2"></div>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">SYSTEM ARCHITECTURE</div>
+      <h2 class="section-title">Every Kilogram<br><span style="color:var(--amber)">Does Two Jobs.</span></h2>
+    </div>
+    <div class="arch-container">
+      <div class="stack-visual reveal">
+        <div class="stack-layer">
+          <span class="stack-layer-name">AI COMPUTE CARD</span>
+          <span class="stack-layer-type">NPU / FPGA / CPU</span>
+        </div>
+        <div class="stack-layer">
+          <span class="stack-layer-name">COLD PLATE + VAPOR SPREADER</span>
+          <span class="stack-layer-type">THERMAL INTERFACE</span>
+        </div>
+        <div class="stack-layer">
+          <span class="stack-layer-name">PCM BURST THERMAL BUFFER</span>
+          <span class="stack-layer-type">THERMAL STORAGE</span>
+        </div>
+        <div class="stack-layer">
+          <span class="stack-layer-name">EMBEDDED FLAT HEAT PIPES</span>
+          <span class="stack-layer-type">PASSIVE TRANSPORT</span>
+        </div>
+        <div class="stack-layer" style="border-color:var(--border);background:var(--panel)">
+          <span class="stack-layer-name" style="color:var(--amber)">STRUCTURAL RADIATOR PANEL</span>
+          <span class="stack-layer-type">STRUCTURE + REJECTION</span>
+        </div>
+        <div class="stack-layer">
+          <span class="stack-layer-name">GaN PMAD + SUPERCAP BAY</span>
+          <span class="stack-layer-type">POWER MANAGEMENT</span>
+        </div>
+      </div>
+      <div class="arch-desc reveal reveal-delay-2">
+        <p>OTIS rejects the traditional approach of treating cooling, power conversion, burst energy storage, radiation resilience, and compute scheduling as separate subsystems bolted together at integration.</p>
+        <div class="arch-principle">"The central design principle: the radiator panel is also structure. The compute mounting surface is part of the thermal path. The power module handles both energy shaping and supervisory protection."</div>
+        <p>This contrasts sharply with terrestrial AI infrastructure, where enclosures, coolers, and supporting systems are independent. In space, dead mass is mission failure. OTIS eliminates dead mass by giving every component multiple roles.</p>
+        <p>Standardized interfaces mean customers can adopt only what they need — from just the base panel up to the full radiation-hardened stack with deployable radiator wings.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION CHALLENGES -->
+<section id="mission">
+  <div class="section-inner">
+    <div class="mission-content">
+      <div class="mission-sidebar reveal">
+        <div class="section-label">WHY IT'S HARD</div>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.2rem)">The Four Hard Problems<br>of<br><span style="color:var(--amber)">Space AI</span></h2>
+      </div>
+      <div class="mission-items">
+        <div class="mission-item reveal">
+          <span class="mission-item-icon">🌡️</span>
+          <div>
+            <div class="mission-item-title">HEAT REJECTION IN VACUUM</div>
+            <p class="mission-item-text">In space, convection doesn't exist. Heat can only leave via radiation. The Stefan-Boltzmann relation means radiator area demands grow quickly when temperature limits are conservative — making thermal management the first bottleneck for onboard AI performance.</p>
+          </div>
+        </div>
+        <div class="mission-item reveal reveal-delay-1">
+          <span class="mission-item-icon">⚡</span>
+          <div>
+            <div class="mission-item-title">INTERMITTENT POWER SUPPLY</div>
+            <p class="mission-item-text">Solar generation drops to zero in eclipse. AI inference creates sharp power spikes that traditional spacecraft bus architectures weren't designed to absorb. Without burst conditioning, you're either undersizing your AI or oversizing your battery.</p>
+          </div>
+        </div>
+        <div class="mission-item reveal reveal-delay-2">
+          <span class="mission-item-icon">☢️</span>
+          <div>
+            <div class="mission-item-title">IONIZING RADIATION</div>
+            <p class="mission-item-text">Single-event upsets can flip bits silently. Latch-up can destroy hardware. Total ionizing dose degrades performance over the mission lifetime. For AI, this isn't just hardware death — a radiation event can corrupt model weights and change inference results without any visible crash.</p>
+          </div>
+        </div>
+        <div class="mission-item reveal reveal-delay-3">
+          <span class="mission-item-icon">⚖️</span>
+          <div>
+            <div class="mission-item-title">MASS & VOLUME CONSTRAINTS</div>
+            <p class="mission-item-text">CubeSat buses limit payload to milligrams per unit volume. Every subsystem must justify its mass. Traditional approaches — separate cooler, separate PMAD, separate compute chassis — cannot survive the mass budget of a small satellite. Integration isn't optional; it's survival.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" style="position:relative;z-index:2"></div>
+
+<!-- FOUNDERS -->
+<section id="founders">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">THE TEAM</div>
+      <h2 class="section-title">Meet the<br><span style="color:var(--amber)">Founders</span></h2>
+    </div>
+    <p class="founders-intro reveal">OTIS was founded by a team at the intersection of aerospace engineering, thermal systems, and embedded computing — united by the belief that the future of space is intelligent, and intelligence needs infrastructure.</p>
+    <div class="founders-grid">
+      <div class="founder-card reveal reveal-delay-1">
+        <div class="founder-avatar">AK</div>
+        <div class="founder-name">ALEX KUMAR</div>
+        <span class="founder-role">CEO & CO-FOUNDER</span>
+        <p class="founder-bio">Former spacecraft thermal systems lead at NASA JPL, where he worked on thermal control architectures for deep-space missions. Alex has a decade of experience pushing heat away from electronics in environments where the laws of physics offer no shortcuts.</p>
+        <span class="founder-tag">THERMAL SYSTEMS · JPL VETERAN</span>
+      </div>
+      <div class="founder-card reveal reveal-delay-2">
+        <div class="founder-avatar">SL</div>
+        <div class="founder-name">SARA LIANG</div>
+        <span class="founder-role">CTO & CO-FOUNDER</span>
+        <p class="founder-bio">Power and radiation-hardening specialist with a background in GaN power electronics for aerospace applications. Sara led the PMAD design for two commercially-launched smallsat constellations before co-founding OTIS.</p>
+        <span class="founder-tag">POWER ELECTRONICS · RAD-HARD</span>
+      </div>
+      <div class="founder-card reveal reveal-delay-3">
+        <div class="founder-avatar">JR</div>
+        <div class="founder-name">JAMES REYES</div>
+        <span class="founder-role">VP ENGINEERING & CO-FOUNDER</span>
+        <p class="founder-bio">Embedded systems and fault-tolerant compute architect. James built the radiation-aware supervisory layer that sits at the heart of the OTIS stack, drawing from experience designing avionics for crewed spacecraft programs.</p>
+        <span class="founder-tag">EMBEDDED SYSTEMS · AVIONICS</span>
+      </div>
+      <div class="founder-card reveal reveal-delay-1">
+        <div class="founder-avatar">MO</div>
+        <div class="founder-name">MAYA OSEI</div>
+        <span class="founder-role">VP BUSINESS DEVELOPMENT</span>
+        <p class="founder-bio">Former satellite program manager at a leading NewSpace operator. Maya brings deep relationships across the smallsat and hosted-payload ecosystem, and understands exactly how mission teams make integration decisions.</p>
+        <span class="founder-tag">NEWSPACE · PROGRAM MANAGEMENT</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="contact-blurb reveal">
+        <div class="section-label">GET IN TOUCH</div>
+        <h2 class="section-title">Ready to<br><span style="color:var(--amber)">Fly AI</span>?</h2>
+        <p>Whether you're building a smallsat, integrating a hosted payload, or evaluating onboard AI infrastructure, we want to talk. OTIS modules are designed to slot into your existing bus — not replace it.</p>
+        <p>Reach out for a mission brief, technical datasheet, or partnership inquiry.</p>
+        <div class="contact-links">
+          <a href="mailto:hello@orbitalotis.com" class="contact-link">
+            <span class="contact-link-icon">✉️</span>
+            <span class="contact-link-label">hello@orbitalotis.com</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-link-icon">🔗</span>
+            <span class="contact-link-label">linkedin.com/company/otis-space</span>
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-link-icon">🌐</span>
+            <span class="contact-link-label">orbitalotis.com</span>
+          </a>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="contact-form">
+          <div class="form-field">
+            <label>YOUR NAME</label>
+            <input type="text" placeholder="Mission Commander">
+          </div>
+          <div class="form-field">
+            <label>ORGANIZATION</label>
+            <input type="text" placeholder="NewSpace Corp / University / Agency">
+          </div>
+          <div class="form-field">
+            <label>EMAIL</label>
+            <input type="email" placeholder="you@yourorg.com">
+          </div>
+          <div class="form-field">
+            <label>INQUIRY TYPE</label>
+            <select>
+              <option value="">Select...</option>
+              <option>Technical Datasheet</option>
+              <option>Mission Brief</option>
+              <option>Partnership / Investment</option>
+              <option>Integration Consultation</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>MESSAGE</label>
+            <textarea rows="4" placeholder="Tell us about your mission..."></textarea>
+          </div>
+          <button class="form-submit">TRANSMIT MESSAGE →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">OT<span>I</span>S</div>
+  <div class="footer-copy">ORBITAL THERMAL INTELLIGENCE SYSTEMS · MAKING AI FLY · © 2025</div>
+  <div class="footer-copy" style="font-family:'Space Mono',monospace;font-size:0.5rem;color:var(--muted)">SYS: NOMINAL · TMP: 23°C · RAD: LOW · PWR: 94%</div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(animRing); }
+animRing();
+document.querySelectorAll('a,button,.tech-card,.founder-card,.stack-layer,.mission-item,.stat-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.width='18px'; cursor.style.height='18px'; ring.style.width='52px'; ring.style.height='52px'; });
+  el.addEventListener('mouseleave', () => { cursor.style.width='12px'; cursor.style.height='12px'; ring.style.width='36px'; ring.style.height='36px'; });
+});
+
+// STARS
+const sf = document.getElementById('starfield');
+for (let i = 0; i < 200; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = Math.random() * 2.5 + 0.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${2+Math.random()*5}s;--op:${0.1+Math.random()*0.7}`;
+  sf.appendChild(s);
+}
+
+// HAMBURGER + MENU
+const burger = document.getElementById('hamburger');
+const menu = document.getElementById('menuOverlay');
+let open = false;
+function closeMenu() { open = false; burger.classList.remove('open'); menu.classList.remove('open'); document.body.style.overflow = ''; }
+burger.addEventListener('click', () => {
+  open = !open; burger.classList.toggle('open', open); menu.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMenu(); });
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// NAV scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.borderBottomColor = window.scrollY > 50 ? 'rgba(245,130,10,0.15)' : 'rgba(100,140,200,0.12)';
+});
+
+// FORM
+document.querySelector('.form-submit').addEventListener('click', () => {
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = 'MESSAGE TRANSMITTED ✓';
+  btn.style.background = 'var(--cyan)';
+  setTimeout(() => { btn.textContent = 'TRANSMIT MESSAGE →'; btn.style.background = 'var(--amber)'; }, 3000);
+});
+</script>
+</body>
+</html>
