@@ -859,6 +859,29 @@
     }
     .form-submit:hover { opacity: 0.85; }
 
+    .form-submit:disabled {
+      opacity: 0.55;
+      cursor: wait;
+    }
+
+    .form-status {
+      min-height: 1.4rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .form-status.success {
+      color: var(--orange-2);
+    }
+
+    .form-status.error {
+      color: #ff8a8a;
+    }
+
+    .form-honeypot {
+      display: none !important;
+    }
+
     /* ── FOOTER ──────────────────────────────────────────── */
     footer {
       background: var(--black);
@@ -1433,24 +1456,43 @@
     <h2>Ready to run AI<br>in orbit?</h2>
     <p>OTIS works with satellite integrators, hosted-payload providers, and mission architects at the earliest stage of design. Reach out to begin a technical briefing.</p>
   </div>
-  <div class="contact-form reveal">
+
+  <!-- Replace YOUR_FORM_ID with the endpoint ID from your Formspree dashboard.
+       Example: https://formspree.io/f/xnqeqabc -->
+  <form
+    class="contact-form reveal"
+    id="briefingForm"
+    action="https://formspree.io/f/YOUR_FORM_ID"
+    method="POST"
+  >
+    <input type="hidden" name="_subject" value="New OTIS Briefing Request" />
+    <input type="text" name="_gotcha" class="form-honeypot" tabindex="-1" autocomplete="off" />
+
     <div class="form-row">
       <div class="form-group">
-        <label>First Name</label>
-        <input type="text" placeholder="Jane" />
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="first_name" type="text" placeholder="Jane" required />
       </div>
       <div class="form-group">
-        <label>Last Name</label>
-        <input type="text" placeholder="Smith" />
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="last_name" type="text" placeholder="Smith" required />
       </div>
     </div>
-    <div class="form-group">
-      <label>Organization</label>
-      <input type="text" placeholder="Aerospace Corp." />
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="jane@company.com" required />
+      </div>
+      <div class="form-group">
+        <label for="organization">Organization</label>
+        <input id="organization" name="organization" type="text" placeholder="Aerospace Corp." />
+      </div>
     </div>
+
     <div class="form-group">
-      <label>Mission Type</label>
-      <select>
+      <label for="missionType">Mission Type</label>
+      <select id="missionType" name="mission_type" required>
         <option value="" disabled selected>Select mission profile</option>
         <option>CubeSat / SmallSat</option>
         <option>Hosted Payload</option>
@@ -1460,12 +1502,15 @@
         <option>Other</option>
       </select>
     </div>
+
     <div class="form-group">
-      <label>Message</label>
-      <textarea placeholder="Describe your mission constraints and AI requirements…"></textarea>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" placeholder="Describe your mission constraints and AI requirements…" required></textarea>
     </div>
-    <button class="form-submit">Send Briefing Request →</button>
-  </div>
+
+    <button class="form-submit" id="briefingSubmit" type="submit">Send Briefing Request →</button>
+    <p class="form-status" id="formStatus" aria-live="polite"></p>
+  </form>
 </section>
 
 <!-- ── FOOTER ────────────────────────────────────────────── -->
@@ -1611,6 +1656,57 @@
       closeMenu();
     }
   });
+
+  /* ── FORMSPREE BRIEFING REQUEST ──────────────────────── */
+  const briefingForm = document.getElementById('briefingForm');
+  const briefingSubmit = document.getElementById('briefingSubmit');
+  const formStatus = document.getElementById('formStatus');
+
+  if (briefingForm) {
+    briefingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formEndpoint = briefingForm.getAttribute('action');
+
+      if (!formEndpoint || formEndpoint.includes('YOUR_FORM_ID')) {
+        formStatus.textContent = 'Formspree is not connected yet. Replace YOUR_FORM_ID with your real Formspree endpoint.';
+        formStatus.className = 'form-status error';
+        return;
+      }
+
+      briefingSubmit.disabled = true;
+      briefingSubmit.textContent = 'Sending…';
+      formStatus.textContent = '';
+      formStatus.className = 'form-status';
+
+      try {
+        const response = await fetch(formEndpoint, {
+          method: 'POST',
+          body: new FormData(briefingForm),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (response.ok) {
+          briefingForm.reset();
+          formStatus.textContent = 'Briefing request sent. We will follow up shortly.';
+          formStatus.className = 'form-status success';
+        } else {
+          const data = await response.json().catch(() => ({}));
+          const errorMessage = data.errors
+            ? data.errors.map(error => error.message).join(', ')
+            : 'Something went wrong. Please try again or email bcruse@mit.edu directly.';
+          formStatus.textContent = errorMessage;
+          formStatus.className = 'form-status error';
+        }
+      } catch (error) {
+        formStatus.textContent = 'Network error. Please try again or email bcruse@mit.edu directly.';
+        formStatus.className = 'form-status error';
+      } finally {
+        briefingSubmit.disabled = false;
+        briefingSubmit.textContent = 'Send Briefing Request →';
+      }
+    });
+  }
 </script>
 
 </body>
