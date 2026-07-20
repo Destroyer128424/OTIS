@@ -1,15 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <title>OTIS — Orbital Thermal Intelligence Systems</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="favicon.ico" rel="icon" type="image/x-icon"/>
+<title>OTIS — Modular Thermal Intelligence</title>
+<meta content="OTIS develops compact thermal infrastructure that enables higher-power orbital payloads within constrained spacecraft area." name="description"/>
+<meta content="index,follow" name="robots"/>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&amp;family=Barlow+Condensed:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
     /* ── RESET & BASE ────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -620,8 +622,8 @@
     }
     .cap-card p { font-size: 0.87rem; color: var(--text); line-height: 1.7; }
 
-    /* ── RADIATION TABLE ─────────────────────────────────── */
-    #radiation {
+    /* ── PERFORMANCE TABLE ───────────────────────────────── */
+    #performance {
       background: var(--deep);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -765,6 +767,57 @@
       right: 0;
       height: 3px;
       background: var(--grad);
+    }
+
+
+    .founder-photo {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      margin-bottom: 1.8rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(135deg, rgba(27,108,168,0.12), rgba(212,98,10,0.08)),
+        repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,0.018) 18px 19px);
+    }
+
+    .founder-photo img {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .founder-photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      text-align: center;
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .founder-photo-placeholder strong {
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .founder-photo-placeholder span {
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: none;
     }
 
     .founder-role {
@@ -995,541 +1048,210 @@
         align-items: flex-start;
       }
     }
-  </style>
-</head>
-<body>
 
+
+    /* ── PUBLIC METRICS / DISCLOSURE CONTROL ───────────── */
+    .stats-disclaimer {
+      grid-column: 1 / -1;
+      padding: 1.1rem 2rem 0;
+      font-size: 0.76rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      letter-spacing: 0.02em;
+    }
+
+    .metric-status {
+      display: inline-block;
+      margin-top: 0.8rem;
+      padding: 4px 9px;
+      border: 1px solid rgba(240,128,48,0.28);
+      color: var(--orange-2);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+
+    .performance-callout {
+      margin: 0 4vw 1.5rem;
+      padding: 1.2rem 1.4rem;
+      background: var(--grad-soft);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    .performance-callout strong { color: var(--white); font-weight: 500; }
+
+    .metric-highlight {
+      color: var(--orange-2);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+
+  
+
+    /* ── STREAMLINED PUBLIC PAGE ─────────────────────────── */
+    #stats { grid-template-columns: repeat(3, 1fr); }
+    #stats .stat-item:nth-child(3) { border-right: none; }
+    .about-grid { grid-template-columns: repeat(3, 1fr); }
+    #advantage { padding-bottom: 7rem; }
+    .advantage-grid { grid-template-columns: repeat(2, 1fr); }
+</style>
+</link></head>
+<body>
 <!-- Custom cursor -->
 <div class="cursor" id="cursor">
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
 </div>
-
 <!-- Starfield -->
 <canvas id="starfield"></canvas>
-
 <!-- ── NAV ─────────────────────────────────────────────── -->
 <nav>
-  <a href="#hero" class="nav-logo">
-    <img src="otis_logo_icon.png" alt="OTIS icon" />
-    <div class="nav-logo-text">
+<a class="nav-logo" href="#hero">
+<img alt="OTIS icon" src="otis_logo_icon.png"/>
+<div class="nav-logo-text">
       OTIS
       <span>Orbital Thermal Intelligence Systems</span>
-    </div>
-  </a>
-
-  <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-inner">
-      <a href="#about">Mission</a>
-      <a href="#architecture">Architecture</a>
-      <a href="#capabilities">Capabilities</a>
-      <a href="#products">Products</a>
-      <a href="#founders">Meet the Founders</a>
-      <a href="#contact" class="mobile-menu-cta">Request Briefing</a>
-    </div>
-  </div>
+</div>
+</a>
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menuToggle">
+<span></span>
+<span></span>
+<span></span>
+</button>
+<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu-inner"><a href="#about">Mission Constraint</a><a href="#advantage">Why OTIS</a><a href="#founders">Team</a><a class="mobile-menu-cta" href="#contact">Request Briefing</a></div>
+</div>
 </nav>
-
 <!-- ── HERO ────────────────────────────────────────────── -->
 <section id="hero">
-  <div class="hero-bg-glow"></div>
-  <div class="hero-ring">
-    <div class="ring-sweep"></div>
-    <div class="ring-sweep-2"></div>
-  </div>
-
-  <p class="hero-eyebrow">Next-Generation Space AI Infrastructure</p>
-  <h1 class="hero-title">
-    Modular<br>
-    <span class="gradient-word">Thermal</span><br>
+<div class="hero-bg-glow"></div>
+<div class="hero-ring">
+<div class="ring-sweep"></div>
+<div class="ring-sweep-2"></div>
+</div>
+<h1 class="hero-title">
+    Modular<br/>
+<span class="gradient-word">Thermal</span><br/>
     Intelligence
-  </h1>
-  <p class="hero-sub">
-    OTIS packages thermal control, burst-power support, and radiation-aware fault handling into a unified integration layer — enabling more onboard AI without forcing a larger spacecraft bus.
-  </p>
-  <div class="hero-actions">
-    <a href="#architecture" class="btn-primary">Explore Architecture</a>
-    <a href="#contact" class="btn-ghost">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Request Mission Briefing
+</h1>
+<p class="hero-sub">OTIS is developing compact thermal infrastructure that enables higher-power orbital payloads within tighter spacecraft area, mass, and integration constraints.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="#advantage">Why OTIS</a>
+<a class="btn-ghost" href="#contact">
+<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      Request Confidential Briefing
     </a>
-  </div>
-
-  <div class="hero-scroll-hint">Scroll to explore</div>
+</div>
+<div class="hero-scroll-hint">Scroll to explore</div>
 </section>
-
 <!-- ── STATS ────────────────────────────────────────────── -->
-<section id="stats" class="reveal">
-  <div class="stat-item">
-    <div class="stat-num">7</div>
-    <div class="stat-label">Integrated Subsystems</div>
-    <div class="stat-desc">One stack replaces fragmented thermal, power, and compute layers</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">0g</div>
-    <div class="stat-label">Decorative Mass</div>
-    <div class="stat-desc">Every kilogram carries structural, thermal, or electrical value</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">LEO</div>
-    <div class="stat-label">Primary Orbit</div>
-    <div class="stat-desc">Designed for the harsh radiation and thermal cycling of low Earth orbit</div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-num">AI</div>
-    <div class="stat-label">First Architecture</div>
-    <div class="stat-desc">Infrastructure sized and scheduled around real inference workloads</div>
-  </div>
-</section>
-
+<section class="reveal" id="stats"><div class="stat-item"><div class="stat-num">800</div><div class="stat-label">W/m² High-Density Target</div><div class="stat-desc">Modeled useful payload heat rejection in the current high-density operating concept</div></div><div class="stat-item"><div class="stat-num">≈45%</div><div class="stat-label">Less Radiator Area</div><div class="stat-desc">Modeled reduction at equal payload heat versus a representative compact passive baseline</div></div><div class="stat-item"><div class="stat-num">Multi-kW</div><div class="stat-label">Scalable Thermal Platform</div><div class="stat-desc">Designed to scale from compact spacecraft surfaces to larger deployable rejection systems</div></div><div class="stats-disclaimer">Modeled design targets; mission results vary with operating conditions and system integration.</div></section>
 <!-- ── ABOUT / PROBLEM ─────────────────────────────────── -->
 <section id="about">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">The Problem</div>
-    <h2 class="section-title">Space breaks<br>terrestrial assumptions</h2>
-    <p class="section-body">Terrestrial AI depends on convection, facility power, and tolerant infrastructure. In orbit, every assumption changes — and the systems that fail to adapt leave performance on the table.</p>
-  </div>
-  <div class="about-grid">
-    <div class="about-card reveal">
-      <div class="about-card-icon">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="18" stroke="#2b8fd4" stroke-width="1.2"/>
-          <path d="M24 6 A18 18 0 0 1 42 24" stroke="#f08030" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="24" cy="24" r="3" fill="#2b8fd4" opacity="0.8"/>
-          <path d="M14 24 h20 M24 14 v20" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-        </svg>
-      </div>
-      <h3>Thermal Rejection</h3>
-      <p>In vacuum, heat can only leave by radiation — not convection. Radiator area is scarce, spacecraft surfaces compete for solar collection and thermal rejection, and power is intermittent across eclipses.</p>
-    </div>
-    <div class="about-card reveal">
-      <div class="about-card-icon">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="8" y="14" width="32" height="20" rx="2" stroke="#f08030" stroke-width="1.2"/>
-          <path d="M16 24 l5 5 11-10" stroke="#2b8fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M8 20 h3 M37 20 h3" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
-        </svg>
-      </div>
-      <h3>Radiation Effects</h3>
-      <p>Ionizing radiation and energetic particles flip bits, corrupt memory, degrade devices, and can trigger destructive overcurrent events — without a single visible crash, inference results quietly change.</p>
-    </div>
-    <div class="about-card reveal">
-      <div class="about-card-icon">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 34 L24 10 L38 34 Z" stroke="#2b8fd4" stroke-width="1.2" fill="none"/>
-          <path d="M18 28 h12" stroke="#f08030" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="24" cy="32" r="1.5" fill="#f08030"/>
-        </svg>
-      </div>
-      <h3>Power Intermittency</h3>
-      <p>Spacecraft batteries and regulators cannot absorb every AI burst peak directly. Oversizing the bus and battery for peak inference loads wastes mass that could fund additional capability.</p>
-    </div>
-    <div class="about-card reveal">
-      <div class="about-card-icon">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="12" y="10" width="24" height="28" rx="1.5" stroke="#2b8fd4" stroke-width="1.2"/>
-          <rect x="16" y="16" width="7" height="7" rx="0.5" fill="rgba(43,143,212,0.3)" stroke="#2b8fd4" stroke-width="0.8"/>
-          <rect x="25" y="16" width="7" height="7" rx="0.5" fill="rgba(212,98,10,0.3)" stroke="#f08030" stroke-width="0.8"/>
-          <rect x="16" y="25" width="16" height="4" rx="0.5" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
-        </svg>
-      </div>
-      <h3>Mass Budget Pressure</h3>
-      <p>CubeSat and smallsat missions operate under tight kilogram constraints. Separate enclosures, coolers, and power regulators pile up dead mass — infrastructure that carries only one function per kilogram.</p>
-    </div>
-  </div>
+<div class="section-header reveal"><div class="section-eyebrow">The Mission Constraint</div><h2 class="section-title">Thermal capacity is becoming<br/>a mission constraint</h2><p class="section-body">As onboard processing grows, heat rejection increasingly determines payload capability, spacecraft size, and mission complexity.</p></div>
+<div class="about-grid"><div class="about-card reveal"><div class="about-card-icon"><svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="18" stroke="#2b8fd4" stroke-width="1.2"></circle><path d="M24 6 A18 18 0 0 1 42 24" stroke="#f08030" stroke-linecap="round" stroke-width="1.5"></path><circle cx="24" cy="24" fill="#2b8fd4" opacity="0.8" r="3"></circle></svg></div><h3>Limited Surface Area</h3><p>Body-mounted radiator area is finite, while deployable systems add mechanisms, stowed volume, and structural burden.</p></div><div class="about-card reveal"><div class="about-card-icon"><svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M13 34h22M16 29h16M19 24h10M22 19h4" stroke="#f08030" stroke-linecap="round" stroke-width="1.5"></path><rect height="32" rx="2" stroke="#2b8fd4" stroke-width="1.2" width="30" x="9" y="8"></rect></svg></div><h3>Rising Payload Density</h3><p>More capable processors concentrate greater heat in smaller volumes, turning thermal capacity into a practical performance ceiling.</p></div><div class="about-card reveal"><div class="about-card-icon"><svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M10 34 L24 10 L38 34 Z" stroke="#2b8fd4" stroke-width="1.2"></path><path d="M18 28h12" stroke="#f08030" stroke-linecap="round" stroke-width="1.5"></path></svg></div><h3>Mission-Level Tradeoffs</h3><p>Thermal gains must justify their electrical power, mass, integration, and reliability costs at the spacecraft level.</p></div></div>
 </section>
-
 <div class="gradient-rule"></div>
-
 <!-- ── ARCHITECTURE ─────────────────────────────────────── -->
-<section id="architecture">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">System Architecture</div>
-    <h2 class="section-title">Every kilogram<br>earns its place</h2>
-    <p class="section-body">The OTIS modular stack co-locates structure, thermal transport, power conditioning, and supervisory control — so no component exists solely to support another.</p>
-  </div>
-  <div class="arch-inner">
-    <div class="stack-visual reveal">
-      <div class="stack-label">OTIS Modular Stack-up — top to base</div>
-      <div class="stack-layers">
-        <div class="stack-layer l1">
-          <span class="stack-layer-num">01</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">AI Compute Card</span>
-            <span class="stack-layer-sub">NPU / FPGA / CPU + memory</span>
-          </span>
-        </div>
-        <div class="stack-layer l2">
-          <span class="stack-layer-num">02</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">Cold Plate + Vapor Spreader</span>
-            <span class="stack-layer-sub">Direct-to-chip conductive path</span>
-          </span>
-        </div>
-        <div class="stack-layer l3">
-          <span class="stack-layer-num">03</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">PCM Burst Thermal Buffer</span>
-            <span class="stack-layer-sub">Phase-change spike absorption</span>
-          </span>
-        </div>
-        <div class="stack-layer l4">
-          <span class="stack-layer-num">04</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">Embedded Flat Heat Pipes</span>
-            <span class="stack-layer-sub">Passive heat transport to panel</span>
-          </span>
-        </div>
-        <div class="stack-layer l5">
-          <span class="stack-layer-num">05</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">Structural Radiator Panel</span>
-            <span class="stack-layer-sub">Load path + thermal rejection</span>
-          </span>
-        </div>
-        <div class="stack-layer l6">
-          <span class="stack-layer-num">06</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">GaN PMAD + Supercap Bay</span>
-            <span class="stack-layer-sub">Burst power + efficient conversion</span>
-          </span>
-        </div>
-        <div class="stack-layer l7">
-          <span class="stack-layer-num">07</span>
-          <span class="stack-layer-inner">
-            <span class="stack-layer-text">Radiation-Aware Supervisor</span>
-            <span class="stack-layer-sub">Fault detection, logging, recovery</span>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="arch-details reveal">
-      <div class="arch-detail-item">
-        <div class="arch-detail-title">Structural Radiator Principle</div>
-        <p>The radiator panel serves dual duty as primary structure, eliminating the need for a separate chassis. Surface coatings are optimized for low solar absorptivity and high IR emissivity to maximize passive heat rejection.</p>
-      </div>
-      <div class="arch-detail-item">
-        <div class="arch-detail-title">Phase-Change Thermal Buffering</div>
-        <p>Short AI inference bursts produce heat spikes that would otherwise force radiator oversizing. PCM tiles absorb transient peaks, allowing rejection hardware to be sized against realistic average loads rather than worst-case instantaneous demand.</p>
-      </div>
-      <div class="arch-detail-item">
-        <div class="arch-detail-title">Supercapacitor Burst Power</div>
-        <p>AI workloads are bursty by nature. A removable supercapacitor cartridge handles short high-current demands locally, smoothing the profile seen by the spacecraft battery and reducing peak bus stress.</p>
-      </div>
-      <div class="arch-detail-item">
-        <div class="arch-detail-title">Radiation Supervisory Layer</div>
-        <p>Rather than relying solely on rad-hard compute, OTIS implements watchdog monitoring, ECC memory paths, current limiting, staged power domains, and graceful recovery logic — enabling higher-performance commercial processors to operate credibly in orbit.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ── CAPABILITIES ─────────────────────────────────────── -->
-<section id="capabilities">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">Core Capabilities</div>
-    <h2 class="section-title">Built for the<br>orbital environment</h2>
-  </div>
-  <div class="cap-grid">
-    <div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)">
-      <div class="cap-card-glow"></div>
-      <div class="cap-number">01</div>
-      <div class="cap-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2b8fd4" stroke-width="1.3" stroke-linecap="round">
-          <path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="1.5" fill="#2b8fd4"/>
-        </svg>
-      </div>
-      <h3>Thermal Management</h3>
-      <p>Integrated cold plate, vapor spreader, heat pipes, and structural radiator provide a short, low-resistance path from compute die to space-facing surface — no pumped loops, no external bulkheads.</p>
-    </div>
-    <div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)">
-      <div class="cap-card-glow"></div>
-      <div class="cap-number">02</div>
-      <div class="cap-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f08030" stroke-width="1.3" stroke-linecap="round">
-          <path d="M13 2 L4.5 13.5 h7 L10 22 L19 10 h-7 Z" stroke="#f08030"/>
-        </svg>
-      </div>
-      <h3>Burst Power Support</h3>
-      <p>GaN power management and supercapacitor cartridges buffer peak inference loads, reducing transient draw on the spacecraft bus and enabling sustained AI operation without battery oversizing.</p>
-    </div>
-    <div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)">
-      <div class="cap-card-glow"></div>
-      <div class="cap-number">03</div>
-      <div class="cap-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2b8fd4" stroke-width="1.3" stroke-linecap="round">
-          <path d="M12 2 L4 6 v6 c0 5 4 8 8 10 c4-2 8-5 8-10 V6 Z"/>
-          <path d="M9 12 l2 2 4-4" stroke="#2b8fd4"/>
-        </svg>
-      </div>
-      <h3>Radiation Resilience</h3>
-      <p>Supervisory logic detects SEU-induced errors, contains latch-up events through fast current limiting, and initiates recovery — from checkpoint restore to full-board reset — without ground intervention.</p>
-    </div>
-    <div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)">
-      <div class="cap-card-glow"></div>
-      <div class="cap-number">04</div>
-      <div class="cap-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f08030" stroke-width="1.3" stroke-linecap="round">
-          <rect x="3" y="6" width="18" height="12" rx="1.5"/>
-          <path d="M8 10 h8 M8 14 h5"/>
-        </svg>
-      </div>
-      <h3>Onboard Inference</h3>
-      <p>The AI compute card is mission-configurable — NPU, FPGA, CPU, or heterogeneous — enabling real-time data triage, autonomous decision-making, and low-latency inference without ground-loop latency.</p>
-    </div>
-    <div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)">
-      <div class="cap-card-glow"></div>
-      <div class="cap-number">05</div>
-      <div class="cap-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#2b8fd4" stroke-width="1.3" stroke-linecap="round">
-          <path d="M4 6 h16 M4 12 h16 M4 18 h16"/>
-          <rect x="7" y="4" width="10" height="4" rx="0.5" fill="rgba(43,143,212,0.2)" stroke="#2b8fd4" stroke-width="0.8"/>
-        </svg>
-      </div>
-      <h3>Modular Integration</h3>
-      <p>Standardized interfaces let customers adopt only the capabilities they need — from the base structural panel through compute support, burst-power module, and optional deployable radiator wing.</p>
-    </div>
-    <div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)">
-      <div class="cap-card-glow"></div>
-      <div class="cap-number">06</div>
-      <div class="cap-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f08030" stroke-width="1.3" stroke-linecap="round">
-          <path d="M3 17 l5-5 4 4 4-6 5 4"/>
-          <circle cx="8" cy="12" r="1" fill="#f08030"/>
-        </svg>
-      </div>
-      <h3>Power-Thermal Scheduling</h3>
-      <p>Supervisory software decides when to run high-power inference, when to cap clocks, when to checkpoint, and when to defer lower-priority work — keeping the stack within thermal and electrical margins throughout the orbit.</p>
-    </div>
-  </div>
+<section id="advantage">
+<div class="section-header reveal"><div class="section-eyebrow">Why OTIS</div><h2 class="section-title">A better<br/>system-level trade</h2><p class="section-body">OTIS is designed to increase useful thermal capacity while preserving the flexibility, integration simplicity, and resilience required by real spacecraft missions.</p></div>
+<div class="cap-grid advantage-grid"><div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)"><div class="cap-card-glow"></div><div class="cap-number">01</div><div class="cap-icon"><svg fill="none" stroke="#2b8fd4" stroke-width="1.3" viewbox="0 0 24 24"><path d="M4 17l5-5 4 3 7-9"></path><path d="M15 6h5v5"></path></svg></div><h3>Preserve Spacecraft Area</h3><p>Increase payload capability without growing thermal hardware at the same rate as heat load.</p></div><div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)"><div class="cap-card-glow"></div><div class="cap-number">02</div><div class="cap-icon"><svg fill="none" stroke="#f08030" stroke-width="1.3" viewbox="0 0 24 24"><path d="M13 2L5 13h7l-1 9 8-12h-7z"></path></svg></div><h3>Use Power Intelligently</h3><p>Match thermal-system energy use to actual mission demand rather than operating permanently at peak conditions.</p></div><div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)"><div class="cap-card-glow"></div><div class="cap-number">03</div><div class="cap-icon"><svg fill="none" stroke="#2b8fd4" stroke-width="1.3" viewbox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"></path></svg></div><h3>Scale with the Mission</h3><p>Extend from compact body-mounted capacity to larger modular and deployable rejection systems.</p></div><div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)"><div class="cap-card-glow"></div><div class="cap-number">04</div><div class="cap-icon"><svg fill="none" stroke="#f08030" stroke-width="1.3" viewbox="0 0 24 24"><rect x="3" y="5" width="7" height="6" rx="1"></rect><rect x="14" y="5" width="7" height="6" rx="1"></rect><rect x="8.5" y="14" width="7" height="6" rx="1"></rect><path d="M6.5 11v2h5.5M17.5 11v2H12M12 13v1"></path></svg></div><h3>Simplify Integration</h3><p>A modular thermal interface is designed to adapt across spacecraft sizes, payload classes, and mission profiles.</p></div></div>
 </section>
-
 <div class="gradient-rule"></div>
-
-<!-- ── RADIATION TABLE ──────────────────────────────────── -->
-<section id="radiation">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">Radiation Mitigation</div>
-    <h2 class="section-title">Trustworthy inference<br>in a fault-prone environment</h2>
-    <p class="section-body">A radiation event may produce a silent memory error that changes an inference result without appearing catastrophic. OTIS addresses the full failure mode spectrum.</p>
-  </div>
-  <div class="rad-table-wrap reveal">
-    <table>
-      <thead>
-        <tr>
-          <th>Effect</th>
-          <th>Impact on AI</th>
-          <th>OTIS Mitigation</th>
-          <th>Layer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>SEU — Single Event Upset</td>
-          <td>Silent corruption of model parameters, intermediate calculations, or inference outputs</td>
-          <td>ECC memory paths, watchdog validation, checkpoint restore, retry logic</td>
-          <td><span class="tag">Compute</span></td>
-        </tr>
-        <tr>
-          <td>SEL — Single Event Latch-up</td>
-          <td>Destructive overcurrent event capable of permanently damaging the processor</td>
-          <td>Fast current limiting, staged power domains, supervisory disconnects, transient energy buffering</td>
-          <td><span class="tag">Power</span></td>
-        </tr>
-        <tr>
-          <td>TID — Total Ionizing Dose</td>
-          <td>Gradual performance degradation and reduced lifetime margin</td>
-          <td>Thermal and power margining, health monitoring telemetry, modular compute card replacement</td>
-          <td><span class="tag">System</span></td>
-        </tr>
-        <tr>
-          <td>DDD — Displacement Damage</td>
-          <td>Altered semiconductor characteristics and changing sensor behavior over mission life</td>
-          <td>Telemetry-driven derating, modular architecture enabling subsystem replacement without full redesign</td>
-          <td><span class="tag">System</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+<!-- ── PERFORMANCE TABLE ───────────────────────────────── -->
 
 <!-- ── PRODUCT FAMILY ────────────────────────────────────── -->
-<section id="products">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">Product Family</div>
-    <h2 class="section-title">Buy only the<br>capability you need</h2>
-    <p class="section-body">A shared base panel keeps integration simple. Optional modules unlock higher-burst, higher-rejection, or higher-resilience configurations as mission requirements evolve.</p>
-  </div>
-  <div class="product-cards">
-    <div class="product-card reveal" style="--p-grad: linear-gradient(90deg, #1b6ca8, #2b8fd4)">
-      <div class="product-card-accent"></div>
-      <div class="product-card-tag">Foundation</div>
-      <h3>Core Panel</h3>
-      <p>Structure, radiator, and GaN PMAD in one flight-ready unit. The entry point for any OTIS integration.</p>
-      <ul class="product-card-list">
-        <li>Structural radiator panel</li>
-        <li>GaN power management</li>
-        <li>Standardized bus interface</li>
-        <li>Radiation supervisory firmware</li>
-      </ul>
-    </div>
-    <div class="product-card reveal" style="--p-grad: linear-gradient(90deg, #1e7ab8, #3890c0)">
-      <div class="product-card-accent"></div>
-      <div class="product-card-tag">Add-on Module</div>
-      <h3>Compute Card</h3>
-      <p>Mission-specific AI processor — NPU, FPGA, CPU, or heterogeneous — sized to the inference workload.</p>
-      <ul class="product-card-list">
-        <li>Customer or OTIS supplied</li>
-        <li>ECC-capable memory</li>
-        <li>Direct cold-plate interface</li>
-        <li>Watchdog integration</li>
-      </ul>
-    </div>
-    <div class="product-card reveal" style="--p-grad: linear-gradient(90deg, #c05818, #e07020)">
-      <div class="product-card-accent"></div>
-      <div class="product-card-tag">Add-on Module</div>
-      <h3>Supercap Cartridge</h3>
-      <p>Removable burst-power module for high-peak inference bursts without oversizing the spacecraft battery.</p>
-      <ul class="product-card-list">
-        <li>Plug-in supercapacitor array</li>
-        <li>Burst conditioning circuitry</li>
-        <li>Bus-transparent operation</li>
-        <li>Hot-swap capable design</li>
-      </ul>
-    </div>
-    <div class="product-card reveal" style="--p-grad: linear-gradient(90deg, #d06015, #f08030)">
-      <div class="product-card-accent"></div>
-      <div class="product-card-tag">Add-on Module</div>
-      <h3>PCM Tile + Deployable Wing</h3>
-      <p>Phase-change thermal buffer and optional deployable radiator interface for high-burst or high-average thermal missions.</p>
-      <ul class="product-card-list">
-        <li>PCM burst heat buffer</li>
-        <li>Deployable radiator interface</li>
-        <li>Expanded rejection area</li>
-        <li>Compatible with all core panels</li>
-      </ul>
-    </div>
-  </div>
-</section>
 
 <!-- ── FOUNDERS ─────────────────────────────────────────── -->
 <section id="founders">
-  <div class="section-header reveal">
-    <div class="section-eyebrow">Meet the Founders</div>
-    <h2 class="section-title">Built by engineers<br>focused on orbital performance</h2>
-    <p class="section-body">
-      OTIS is being built by founders working at the intersection of thermal systems, hardware integration, and next-generation compute infrastructure for space.
-    </p>
-  </div>
-
-  <div class="founders-grid">
-    <div class="founder-card reveal">
-      <div class="founder-card-accent"></div>
-      <div class="founder-role">Co-Founder</div>
-      <h3>Brady Cruse</h3>
-      <p>
-        Brady is a 3rd year undergrad studying Electrical Engineering at MIT. He specilizes in systems and materials engineering and is the current co-founder of two other succesfull startups. 
-      </p>
-    </div>
-
-    <div class="founder-card reveal">
-      <div class="founder-card-accent"></div>
-      <div class="founder-role">Co-Founder</div>
-      <h3>Daniel Cruse</h3>
-      <p>
-        Daniel is a 3rd year undergrad studying Aerospace Engineering at MIT.
-      </p>
-    </div>
-  </div>
+<div class="section-header reveal"><div class="section-eyebrow">Team</div><h2 class="section-title">Building infrastructure<br/>for orbital compute</h2><p class="section-body">OTIS combines spacecraft engineering, thermal systems, and high-performance hardware integration.</p></div>
+<div class="founders-grid">
+<div class="founder-card reveal">
+<div class="founder-card-accent"></div>
+<div class="founder-photo">
+  <div class="founder-photo-placeholder"><strong>Add founder photo</strong><span>images/brady-cruse.jpg</span></div>
+  <img src="images/brady-cruse.jpg" alt="Brady Cruse" loading="lazy" onerror="this.remove()"/>
+</div>
+<div class="founder-role">Co-Founder</div>
+<h3>Brady Cruse</h3>
+<p>Brady is a third-year MIT undergraduate studying electrical engineering, with a focus on systems and materials engineering. He has also co-founded two other startups.</p>
+</div>
+<div class="founder-card reveal">
+<div class="founder-card-accent"></div>
+<div class="founder-photo">
+  <div class="founder-photo-placeholder"><strong>Add founder photo</strong><span>images/daniel-cruse.jpg</span></div>
+  <img src="images/daniel-cruse.jpg" alt="Daniel Cruse" loading="lazy" onerror="this.remove()"/>
+</div>
+<div class="founder-role">Co-Founder</div>
+<h3>Daniel Cruse</h3>
+<p>Daniel is a third-year MIT undergraduate studying aerospace engineering, focused on spacecraft systems and the practical constraints of operating high-power payloads in orbit.</p>
+</div>
+</div>
 </section>
-
 <!-- ── CONTACT ───────────────────────────────────────────── -->
 <section id="contact">
-  <div class="contact-text reveal">
-    <h2>Ready to run AI<br>in orbit?</h2>
-    <p>OTIS works with satellite integrators, hosted-payload providers, and mission architects at the earliest stage of design. Reach out to begin a technical briefing.</p>
-  </div>
-
-  <!-- Replace YOUR_FORM_ID with the endpoint ID from your Formspree dashboard.
-       Example: https://formspree.io/f/xnqeqabc -->
-  <form
-    class="contact-form reveal"
-    id="briefingForm"
-    action="https://formspree.io/f/xwvzaraa"
-    method="POST"
-  >
-    <input type="hidden" name="_subject" value="New OTIS Briefing Request" />
-    <input type="text" name="_gotcha" class="form-honeypot" tabindex="-1" autocomplete="off" />
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="firstName">First Name</label>
-        <input id="firstName" name="first_name" type="text" placeholder="Jane" required />
-      </div>
-      <div class="form-group">
-        <label for="lastName">Last Name</label>
-        <input id="lastName" name="last_name" type="text" placeholder="Smith" required />
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="jane@company.com" required />
-      </div>
-      <div class="form-group">
-        <label for="organization">Organization</label>
-        <input id="organization" name="organization" type="text" placeholder="Aerospace Corp." />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="missionType">Mission Type</label>
-      <select id="missionType" name="mission_type" required>
-        <option value="" disabled selected>Select mission profile</option>
-        <option>CubeSat / SmallSat</option>
-        <option>Hosted Payload</option>
-        <option>Commercial Remote Sensing</option>
-        <option>Government / Defense</option>
-        <option>Research / Academic</option>
-        <option>Other</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" placeholder="Describe your mission constraints and AI requirements…" required></textarea>
-    </div>
-
-    <button class="form-submit" id="briefingSubmit" type="submit">Send Briefing Request →</button>
-    <p class="form-status" id="formStatus" aria-live="polite"></p>
-  </form>
+<div class="contact-text reveal"><h2>Designing a<br/>high-power mission?</h2><p>OTIS works with satellite integrators, hosted-payload providers, mission architects, and strategic partners. Qualified teams can request a confidential technical briefing.</p></div>
+<form action="https://formspree.io/f/xwvzaraa" class="contact-form reveal" id="briefingForm" method="POST">
+<input name="_subject" type="hidden" value="New OTIS Confidential Briefing Request"/>
+<input autocomplete="off" class="form-honeypot" name="_gotcha" tabindex="-1" type="text"/>
+<div class="form-row">
+<div class="form-group">
+<label for="firstName">First Name</label>
+<input id="firstName" name="first_name" placeholder="Jane" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="lastName">Last Name</label>
+<input id="lastName" name="last_name" placeholder="Smith" required="" type="text"/>
+</div>
+</div>
+<div class="form-row">
+<div class="form-group">
+<label for="email">Email</label>
+<input id="email" name="email" placeholder="jane@company.com" required="" type="email"/>
+</div>
+<div class="form-group">
+<label for="organization">Organization</label>
+<input id="organization" name="organization" placeholder="Aerospace Corp." type="text"/>
+</div>
+</div>
+<div class="form-group">
+<label for="missionType">Mission Profile</label>
+<select id="missionType" name="mission_type" required="">
+<option disabled="" selected="" value="">Select mission profile</option>
+<option>CubeSat / SmallSat</option>
+<option>Hosted Payload</option>
+<option>Orbital Compute</option>
+<option>Commercial Remote Sensing</option>
+<option>Government / Defense</option>
+<option>Research / Academic</option>
+<option>Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="message">Mission Need</label>
+<textarea id="message" name="message" placeholder="Share the approximate payload heat load, spacecraft class, timeline, and integration constraints…" required=""></textarea>
+</div>
+<button class="form-submit" id="briefingSubmit" type="submit">Request Confidential Briefing →</button>
+<p aria-live="polite" class="form-status" id="formStatus"></p>
+</form>
 </section>
-
 <!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer>
-  <div class="footer-logo">
-    <img src="otis_logo_icon.png" alt="OTIS" />
-    <span class="footer-tagline">Orbital Thermal Intelligence Systems</span>
-  </div>
-  <ul class="footer-links">
-    <li><a href="#about">Mission</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#capabilities">Capabilities</a></li>
-    <li><a href="#products">Products</a></li>
-    <li><a href="#founders">Founders</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="footer-copy">© 2026 Orbital Thermal Intelligence Systems. All rights reserved.</div>
+<div class="footer-logo">
+<img alt="OTIS" src="otis_logo_icon.png"/>
+<span class="footer-tagline">Orbital Thermal Intelligence Systems</span>
+</div>
+<ul class="footer-links"><li><a href="#about">Mission</a></li><li><a href="#advantage">Why OTIS</a></li><li><a href="#founders">Team</a></li><li><a href="#contact">Contact</a></li></ul>
+<div class="footer-copy">© 2026 Orbital Thermal Intelligence Systems. All rights reserved.</div>
 </footer>
-
 <script>
   /* ── CURSOR ─────────────────────────────────────────── */
   const cursor = document.getElementById('cursor');
@@ -1688,7 +1410,7 @@
 
         if (response.ok) {
           briefingForm.reset();
-          formStatus.textContent = 'Briefing request sent. We will follow up shortly.';
+          formStatus.textContent = 'Confidential briefing request sent. We will follow up shortly.';
           formStatus.className = 'form-status success';
         } else {
           const data = await response.json().catch(() => ({}));
@@ -1703,11 +1425,10 @@
         formStatus.className = 'form-status error';
       } finally {
         briefingSubmit.disabled = false;
-        briefingSubmit.textContent = 'Send Briefing Request →';
+        briefingSubmit.textContent = 'Request Confidential Briefing →';
       }
     });
   }
 </script>
-
 </body>
 </html>
