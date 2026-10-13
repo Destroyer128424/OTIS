@@ -9,6 +9,7 @@ Static website published through GitHub Pages at https://otisspace.com.
 - `products/thermalcore/index.html`: integrated thermal assemblies.
 - `products/orbitbench/index.html`: thermal test equipment and software.
 - `assets/site.css` and `assets/site.js`: shared styles, navigation, and contact behavior.
+- `assets/atmosphere.js`: decorative stars and pointer effects, with reduced-motion and touch support.
 - `sitemap.xml`: public page URLs.
 
 No build step or package installation is required. Serve the repository root with any static HTTP server to preview the site, for example `python -m http.server 8765`.

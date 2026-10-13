@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OTIS Space — Thermal systems for spacecraft computing</title>
   <meta name="description" content="OTIS Space is developing thermal hardware and control software for spacecraft, including workload scheduling, thermal storage, heat routing, integrated cooling, and testing.">
-  <meta name="theme-color" content="#080c11">
+  <meta name="theme-color" content="#050709">
   <link rel="canonical" href="https://otisspace.com/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="OTIS Space — Thermal systems for spacecraft computing">
@@ -17,13 +17,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="assets/site.css">
   <script src="assets/site.js" defer></script>
+  <script src="assets/atmosphere.js" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="./" aria-label="OTIS Space home"><img src="otis_logo_icon.png" alt="" width="42" height="42">OTIS SPACE</a>
-    <button class="nav-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+    <button class="nav-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Open navigation"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
     <nav id="site-navigation" aria-label="Main navigation">
       <details class="product-nav">
         <summary>Products</summary>
@@ -44,10 +45,11 @@
 </header>
 <main id="main">
   <section class="hero" id="hero">
+    <div class="orbital-rings" aria-hidden="true"><span></span><span></span></div>
     <div class="container hero-grid">
       <div class="hero-copy">
         <p class="eyebrow">Spacecraft thermal management</p>
-        <h1>Thermal systems for spacecraft computing</h1>
+        <h1>Thermal systems for <span>spacecraft computing</span></h1>
         <p>OTIS Space is developing hardware and software to manage heat in high-power spacecraft. Our products cover workload scheduling, thermal storage, heat routing, cooling integration, and ground testing.</p>
         <div class="actions"><a class="button button-primary" href="#products">Explore products</a><a class="button" href="#contact">Talk to the team</a></div>
       </div>
