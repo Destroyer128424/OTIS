@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HeatRoute — Switchable thermal connections for spacecraft | OTIS Space</title>
+  <meta name="description" content="Components to connect or isolate heat paths between payloads, thermal storage, and radiators. In development at OTIS Space.">
+  <meta name="theme-color" content="#080c11">
+  <link rel="canonical" href="https://otisspace.com/products/heatroute/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HeatRoute — Switchable thermal connections for spacecraft | OTIS Space">
+  <meta property="og:description" content="Components to connect or isolate heat paths between payloads, thermal storage, and radiators. In development at OTIS Space.">
+  <meta property="og:url" content="https://otisspace.com/products/heatroute/">
+  <meta property="og:image" content="https://otisspace.com/otis_logo_icon.png">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../../assets/site.css">
+  <script src="../../assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../../" aria-label="OTIS Space home"><img src="../../otis_logo_icon.png" alt="" width="42" height="42">OTIS SPACE</a>
+    <button class="nav-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+    <nav id="site-navigation" aria-label="Main navigation">
+      <details class="product-nav">
+        <summary>Products</summary>
+        <div class="product-dropdown">
+          <a class="all-products" href="../../#products">All products</a>
+          <a href="../../products/orbitpilot/">OrbitPilot<small>Control software</small></a>
+<a href="../../products/heatbank/">HeatBank<small>Thermal storage</small></a>
+<a href="../../products/heatroute/" aria-current="page">HeatRoute<small>Thermal switching</small></a>
+<a href="../../products/thermalcore/">ThermalCore<small>Integrated subsystem</small></a>
+<a href="../../products/orbitbench/">OrbitBench<small>Test equipment and software</small></a>
+        </div>
+      </details>
+      <a href="../../#about">Company</a>
+      <a href="../../#founders">Team</a>
+      <a class="nav-contact" href="../../#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container breadcrumb"><a href="../../#products">Products</a><span aria-hidden="true">/</span>HeatRoute</div>
+  <section class="product-hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="product-heading">HeatRoute</p>
+        <h1>Switchable thermal connections for spacecraft</h1>
+        <p class="product-intro">We are designing HeatRoute to control the connection between equipment and its cooling or storage path. The goal is strong heat transfer when cooling is needed and greater isolation when that connection would be undesirable.</p>
+        <div class="product-meta"><span class="status">In development</span><span>Thermal switching</span></div>
+        <div class="actions"><a class="button button-primary" href="../../?product=HeatRoute#contact">Discuss HeatRoute</a></div>
+      </div>
+      <figure class="system-figure">
+  <div class="figure-label"><span>System concept</span><span>OTIS Space</span></div>
+  <svg class="schematic" viewBox="0 0 560 365" role="img" aria-labelledby="schematic-title"><title id="schematic-title">A routing assembly could connect or isolate thermal paths as operating conditions change.</title><path class="wire-heat" d="M165 183H205M355 183H375V80H401M375 183V286H401"/><rect class="node" x="15" y="147" width="150" height="72" rx="5"/><text x="90.0" y="176">Payload</text><text class="small" x="90.0" y="198">Heat source</text><rect class="node node-accent" x="205" y="147" width="150" height="72" rx="5"/><text x="280.0" y="176">HeatRoute</text><text class="small" x="280.0" y="198">Controlled connection</text><rect class="node" x="401" y="44" width="144" height="72" rx="5"/><text x="473.0" y="73">Radiator</text><text class="small" x="473.0" y="95">Cooling path</text><rect class="node" x="401" y="250" width="144" height="72" rx="5"/><text x="473.0" y="279">Thermal store</text><text class="small" x="473.0" y="301">Storage path</text></svg>
+  <figcaption>A routing assembly could connect or isolate thermal paths as operating conditions change.</figcaption>
+</figure>
+    </div>
+  </section>
+  <nav class="page-section-nav" aria-label="On this page"><div class="container"><a href="#applications">Applications</a><a href="#design">Design scope</a><a href="#integration">Integration</a><a href="#development">Development</a></div></nav>
+  <section class="section" id="applications"><div class="container split"><h2>Intended applications</h2><div class="prose"><p>HeatRoute is intended for equipment whose thermal needs change during a mission. Potential applications include computing payloads, temperature-sensitive subsystems, and controlled connections to thermal storage.</p></div></div></section>
+  <section class="section" id="design"><div class="container split"><div><h2>Design scope</h2></div><div class="detail-list"><div class="detail-item"><h3>Switchable conductance</h3><p>Change heat transfer between two defined interfaces to provide connected and isolated operating states.</p></div><div class="detail-item"><h3>State feedback</h3><p>Provide feedback so the controller can check whether the commanded thermal connection has been established.</p></div><div class="detail-item"><h3>Multiple heat paths</h3><p>Combine switches into a routing assembly where a payload needs access to more than one cooling or storage path.</p></div></div></div></section>
+  <section class="section" id="integration"><div class="container split"><div><h2>Integration requirements</h2><p class="section-note">These inputs will determine the design and evaluation scope.</p></div><ul class="requirements"><li>Required thermal conductance in the connected and isolated states.</li><li>Operating temperatures and the expected temperature differences.</li><li>Switching speed, expected cycle count, and available actuation power.</li><li>Acceptable behavior following a loss of power, control, or actuation.</li></ul></div></section>
+  <section class="section" id="development"><div class="container split"><div><h2>Development and evaluation</h2><p class="section-note">Planned component development</p></div><div class="prose"><p>The switching mechanism remains a design decision. Bench tests will establish conductance, isolation, actuation requirements, and repeatability before a component specification is set.</p><p>Failure behavior is part of the thermal design. A mission may need a switch to remain connected, remain isolated, or move to a defined state when control is lost.</p><p class="section-note">Related products</p><div class="related-products"><a href="../heatbank/">HeatBank</a><a href="../thermalcore/">ThermalCore</a></div></div></div></section>
+  <section class="product-contact"><div class="container"><div><h2>Discuss HeatRoute with our team</h2><p>Share the heat paths you need to control and the required operating and failure states.</p></div><a class="button button-primary" href="../../?product=HeatRoute#contact">Contact OTIS</a></div></section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="../../"><img src="../../otis_logo_icon.png" alt="" width="42" height="42">OTIS SPACE</a><p>Thermal hardware and control software for spacecraft computing.</p></div>
+      <div><h2>Products</h2><ul class="footer-links"><li><a href="../../products/orbitpilot/">OrbitPilot</a></li><li><a href="../../products/heatbank/">HeatBank</a></li><li><a href="../../products/heatroute/">HeatRoute</a></li><li><a href="../../products/thermalcore/">ThermalCore</a></li><li><a href="../../products/orbitbench/">OrbitBench</a></li></ul></div>
+      <div><h2>Company</h2><ul class="footer-links"><li><a href="../../#about">About</a></li><li><a href="../../#founders">Team</a></li><li><a href="../../#contact">Contact</a></li><li><a href="mailto:bcruse@mit.edu">bcruse@mit.edu</a></li></ul></div>
+    </div>
+    <p class="copyright">© 2026 Orbital Thermal Intelligence Systems. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

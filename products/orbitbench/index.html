@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OrbitBench — Thermal testing for spacecraft workloads | OTIS Space</title>
+  <meta name="description" content="Test tools to reproduce workload profiles and compare thermal designs under defined conditions. In development at OTIS Space.">
+  <meta name="theme-color" content="#080c11">
+  <link rel="canonical" href="https://otisspace.com/products/orbitbench/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OrbitBench — Thermal testing for spacecraft workloads | OTIS Space">
+  <meta property="og:description" content="Test tools to reproduce workload profiles and compare thermal designs under defined conditions. In development at OTIS Space.">
+  <meta property="og:url" content="https://otisspace.com/products/orbitbench/">
+  <meta property="og:image" content="https://otisspace.com/otis_logo_icon.png">
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../../assets/site.css">
+  <script src="../../assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../../" aria-label="OTIS Space home"><img src="../../otis_logo_icon.png" alt="" width="42" height="42">OTIS SPACE</a>
+    <button class="nav-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="Open navigation">Menu</button>
+    <nav id="site-navigation" aria-label="Main navigation">
+      <details class="product-nav">
+        <summary>Products</summary>
+        <div class="product-dropdown">
+          <a class="all-products" href="../../#products">All products</a>
+          <a href="../../products/orbitpilot/">OrbitPilot<small>Control software</small></a>
+<a href="../../products/heatbank/">HeatBank<small>Thermal storage</small></a>
+<a href="../../products/heatroute/">HeatRoute<small>Thermal switching</small></a>
+<a href="../../products/thermalcore/">ThermalCore<small>Integrated subsystem</small></a>
+<a href="../../products/orbitbench/" aria-current="page">OrbitBench<small>Test equipment and software</small></a>
+        </div>
+      </details>
+      <a href="../../#about">Company</a>
+      <a href="../../#founders">Team</a>
+      <a class="nav-contact" href="../../#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="container breadcrumb"><a href="../../#products">Products</a><span aria-hidden="true">/</span>OrbitBench</div>
+  <section class="product-hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="product-heading">OrbitBench</p>
+        <h1>Thermal testing for spacecraft workloads</h1>
+        <p class="product-intro">We are developing OrbitBench to measure how computing workloads and thermal hardware behave together. The platform would combine controllable heat loads, instrumentation, and analysis software for ground evaluation.</p>
+        <div class="product-meta"><span class="status">In development</span><span>Test equipment and software</span></div>
+        <div class="actions"><a class="button button-primary" href="../../?product=OrbitBench#contact">Discuss OrbitBench</a></div>
+      </div>
+      <figure class="system-figure">
+  <div class="figure-label"><span>System concept</span><span>OTIS Space</span></div>
+  <svg class="schematic" viewBox="0 0 560 365" role="img" aria-labelledby="schematic-title"><title id="schematic-title">A proposed test setup links a repeatable load profile with instrumented hardware and recorded results.</title><path class="wire" d="M170 137H210M350 137H390"/><path class="wire control" d="M280 173V246"/><rect class="node" x="20" y="101" width="150" height="72" rx="5"/><text x="95.0" y="130">Load profile</text><text class="small" x="95.0" y="152">Test input</text><rect class="node node-accent" x="205" y="101" width="150" height="72" rx="5"/><text x="280.0" y="130">Test hardware</text><text class="small" x="280.0" y="152">Instrumented setup</text><rect class="node" x="390" y="101" width="150" height="72" rx="5"/><text x="465.0" y="130">Measurements</text><text class="small" x="465.0" y="152">Recorded results</text><rect class="node" x="176" y="246" width="208" height="72" rx="5"/><text x="280.0" y="275">Analysis</text><text class="small" x="280.0" y="297">Model comparison</text></svg>
+  <figcaption>A proposed test setup links a repeatable load profile with instrumented hardware and recorded results.</figcaption>
+</figure>
+    </div>
+  </section>
+  <nav class="page-section-nav" aria-label="On this page"><div class="container"><a href="#applications">Applications</a><a href="#design">Design scope</a><a href="#integration">Integration</a><a href="#development">Development</a></div></nav>
+  <section class="section" id="applications"><div class="container split"><h2>Intended applications</h2><div class="prose"><p>OrbitBench is intended for payload developers, spacecraft integrators, and test laboratories assessing operating limits and computing duty cycles. It will support component comparisons, controller development, and model correlation.</p></div></div></section>
+  <section class="section" id="design"><div class="container split"><div><h2>Design scope</h2></div><div class="detail-list"><div class="detail-item"><h3>Workload reproduction</h3><p>Reproduce representative computing or heat-load profiles so designs can be compared under the same input conditions.</p></div><div class="detail-item"><h3>Synchronized measurements</h3><p>Record temperatures, power use, and relevant workload outcomes with a defined measurement setup.</p></div><div class="detail-item"><h3>Model comparison</h3><p>Compare repeated tests and identify differences between predicted and measured thermal behavior.</p></div></div></div></section>
+  <section class="section" id="integration"><div class="container split"><div><h2>Integration requirements</h2><p class="section-note">These inputs will determine the design and evaluation scope.</p></div><ul class="requirements"><li>The hardware under test and the workload or heat profiles to reproduce.</li><li>Required thermal conditions and access to suitable environmental equipment.</li><li>Sensors, measurement accuracy, sampling rates, and calibration needs.</li><li>Acceptance criteria, data formats, and reporting requirements.</li></ul></div></section>
+  <section class="section" id="development"><div class="container split"><div><h2>Development and evaluation</h2><p class="section-note">Development and test platform</p></div><div class="prose"><p>The first priority is a repeatable, calibrated bench with a clear account of measurement uncertainty. Tests will compare hardware and control approaches using the same inputs and acceptance criteria.</p><p>Thermal-vacuum and flight-qualification testing require appropriate facilities and a separately defined scope. A bench evaluation does not by itself qualify hardware for flight.</p><p class="section-note">Related products</p><div class="related-products"><a href="../orbitpilot/">OrbitPilot</a><a href="../thermalcore/">ThermalCore</a></div></div></div></section>
+  <section class="product-contact"><div class="container"><div><h2>Discuss OrbitBench with our team</h2><p>Share the hardware you need to evaluate and the conditions the test must reproduce.</p></div><a class="button button-primary" href="../../?product=OrbitBench#contact">Contact OTIS</a></div></section>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a class="brand" href="../../"><img src="../../otis_logo_icon.png" alt="" width="42" height="42">OTIS SPACE</a><p>Thermal hardware and control software for spacecraft computing.</p></div>
+      <div><h2>Products</h2><ul class="footer-links"><li><a href="../../products/orbitpilot/">OrbitPilot</a></li><li><a href="../../products/heatbank/">HeatBank</a></li><li><a href="../../products/heatroute/">HeatRoute</a></li><li><a href="../../products/thermalcore/">ThermalCore</a></li><li><a href="../../products/orbitbench/">OrbitBench</a></li></ul></div>
+      <div><h2>Company</h2><ul class="footer-links"><li><a href="../../#about">About</a></li><li><a href="../../#founders">Team</a></li><li><a href="../../#contact">Contact</a></li><li><a href="mailto:bcruse@mit.edu">bcruse@mit.edu</a></li></ul></div>
+    </div>
+    <p class="copyright">© 2026 Orbital Thermal Intelligence Systems. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
