@@ -3,19 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OrbitPilot — Workload control for spacecraft computing | OTIS Space</title>
-  <meta name="description" content="Software to schedule computing tasks using thermal conditions, available power, and mission deadlines. In development at OTIS Space.">
+  <title>OrbitPilot — Mission planning for spacecraft computing | OTIS Space</title>
+  <meta name="description" content="Plan spacecraft computing workloads around thermal and power limits. Build mission scenarios, compare schedules, and inspect predicted temperature and battery use with OrbitPilot.">
   <meta name="theme-color" content="#050709">
   <link rel="canonical" href="https://otisspace.com/products/orbitpilot/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="OrbitPilot — Workload control for spacecraft computing | OTIS Space">
-  <meta property="og:description" content="Software to schedule computing tasks using thermal conditions, available power, and mission deadlines. In development at OTIS Space.">
+  <meta property="og:title" content="OrbitPilot — Mission planning for spacecraft computing | OTIS Space">
+  <meta property="og:description" content="Build mission scenarios, schedule computing workloads, and compare predicted temperature and battery use. Explore the OrbitPilot v0.1 ground-planning prototype.">
   <meta property="og:url" content="https://otisspace.com/products/orbitpilot/">
-  <meta property="og:image" content="https://otisspace.com/images/products/orbitpilot-cad-v1.webp">
+  <meta property="og:image" content="https://otisspace.com/images/products/orbitpilot-ui-overview-v1.webp">
+  <meta property="og:image:alt" content="OrbitPilot v0.1 mission planner showing a synthetic spacecraft computing scenario.">
   <link rel="icon" href="../../favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../../assets/site.css?v=20261013-cad">
+  <link rel="stylesheet" href="../../assets/site.css?v=20261013-orbitpilot-ui">
   <script src="../../assets/site.js" defer></script>
   <script src="../../assets/atmosphere.js" defer></script>
 </head>
@@ -30,7 +31,7 @@
         <summary>Products</summary>
         <div class="product-dropdown">
           <a class="all-products" href="../../#products">All products</a>
-          <a href="../../products/orbitpilot/" aria-current="page">OrbitPilot<small>Control software</small></a>
+          <a href="../../products/orbitpilot/" aria-current="page">OrbitPilot<small>Planning software</small></a>
 <a href="../../products/heatbank/">HeatBank<small>Thermal storage</small></a>
 <a href="../../products/heatroute/">HeatRoute<small>Thermal switching</small></a>
 <a href="../../products/thermalcore/">ThermalCore<small>Integrated subsystem</small></a>
@@ -45,33 +46,94 @@
 </header>
 <main id="main">
   <div class="container breadcrumb"><a href="../../#products">Products</a><span aria-hidden="true">/</span>OrbitPilot</div>
-  <section class="product-hero">
+  <section class="product-hero software-hero">
     <div class="orbital-rings" aria-hidden="true"><span></span><span></span></div>
     <div class="container hero-grid">
       <div>
         <p class="product-heading">OrbitPilot</p>
-        <h1>Workload control for spacecraft computing</h1>
-        <p class="product-intro">We are developing OrbitPilot to schedule computing tasks around a spacecraft’s thermal limits, power availability, and mission priorities. The software is intended to help operators decide when a processor can run and when a task needs to wait.</p>
-        <div class="product-meta"><span class="status">In development</span><span>Control software</span></div>
-        <div class="actions"><a class="button button-primary" href="../../?product=OrbitPilot#contact">Discuss OrbitPilot</a></div>
+        <h1>Plan spacecraft computing around thermal and power limits</h1>
+        <p class="product-intro">Build a mission scenario, schedule computing tasks, and inspect predicted temperature and battery use before integration.</p>
+        <div class="product-meta"><span class="status">Ground-planning prototype</span><span>Version 0.1</span></div>
+        <div class="actions"><a class="button button-primary" href="../../?product=OrbitPilot#contact">Request a demo</a></div>
       </div>
-      <figure class="system-figure render-figure">
-  <div class="figure-label"><span>OrbitPilot</span><span>Interface concept</span></div>
-  <img class="product-render" src="../../images/products/orbitpilot-cad-v1.webp" alt="OrbitPilot interface concept with workload schedule, thermal state, and orbit context panels" width="1800" height="1800" loading="eager" fetchpriority="high" decoding="async">
-  <figcaption>In development</figcaption>
-</figure>
+      <figure class="system-figure software-figure">
+        <div class="figure-label"><span>OrbitPilot v0.1</span><span>Mission planner</span></div>
+        <a href="../../images/products/orbitpilot-ui-overview-v1.webp" target="_blank" rel="noopener" aria-label="Open the OrbitPilot mission planner screenshot at full size in a new tab">
+          <img class="software-screenshot" src="../../images/products/orbitpilot-ui-overview-v1.webp" srcset="../../images/products/orbitpilot-ui-overview-v1-640.webp 640w, ../../images/products/orbitpilot-ui-overview-v1.webp 1265w" sizes="(max-width: 760px) calc(100vw - 40px), 60vw" alt="OrbitPilot mission planner with editable mission settings and comparison results" width="1265" height="712" loading="eager" fetchpriority="high" decoding="async">
+        </a>
+        <figcaption>The running application, using a synthetic mission. Open the image to inspect the interface.</figcaption>
+      </figure>
     </div>
   </section>
-  <nav class="page-section-nav" aria-label="On this page"><div class="container"><a href="#applications">Applications</a><a href="#design">Design scope</a><a href="#integration">Integration</a><a href="#development">Development</a></div></nav>
-  <section class="section" id="applications"><div class="container split"><h2>Intended applications</h2><div class="prose"><p>OrbitPilot is intended for onboard processing with some flexibility in timing or power use, including image analysis and scheduled computing tasks. Its value will depend on the operating limits and scheduling freedom of each mission.</p></div></div></section>
-  <section class="section" id="design"><div class="container split"><div><h2>Design scope</h2><figure class="system-figure design-figure">
-  <div class="figure-label"><span>System concept</span><span>OTIS Space</span></div>
-  <svg class="schematic" viewBox="0 0 560 365" role="img" aria-labelledby="schematic-title"><title id="schematic-title">The proposed controller uses mission requirements and telemetry to inform workload scheduling.</title><path class="wire" d="M280 110V155M280 227V273"/><rect class="node" x="150" y="24" width="260" height="72" rx="5"/><text x="280.0" y="53">Mission inputs</text><text class="small" x="280.0" y="75">Telemetry and task requirements</text><rect class="node node-accent" x="176" y="155" width="208" height="72" rx="5"/><text x="280.0" y="184">OrbitPilot</text><text class="small" x="280.0" y="206">Scheduling decisions</text><rect class="node" x="150" y="273" width="260" height="72" rx="5"/><text x="280.0" y="302">Compute workload</text><text class="small" x="280.0" y="324">Timing and power settings</text></svg>
-  <figcaption>The proposed controller uses mission requirements and telemetry to inform workload scheduling.</figcaption>
-</figure></div><div class="detail-list"><div class="detail-item"><h3>State estimation</h3><p>Combine temperature measurements, power availability, and workload requirements to estimate the capacity for additional computing.</p></div><div class="detail-item"><h3>Workload scheduling</h3><p>Adjust task timing or processor power settings within the limits and control authority set by the spacecraft operator.</p></div><div class="detail-item"><h3>Ground evaluation</h3><p>Compare proposed schedules with existing controls and inspect the conditions behind each scheduling decision.</p></div></div></div></section>
-  <section class="section" id="integration"><div class="container split"><div><h2>Integration requirements</h2><p class="section-note">These inputs will determine the design and evaluation scope.</p></div><ul class="requirements"><li>Workload power profiles, task priorities, and deadlines.</li><li>Temperature limits, available sensors, and the response of the cooling system.</li><li>Battery constraints and electrical power available during each operating phase.</li><li>Flight-computer interfaces, permitted control actions, and fallback behavior.</li></ul></div></section>
-  <section class="section" id="development"><div class="container split"><div><h2>Development and evaluation</h2><p class="section-note">Initial product focus</p></div><div class="prose"><p>The first evaluation will compare coordinated scheduling with a customer’s existing controls using the same workloads and mission limits. Relevant outcomes include completed tasks, missed deadlines, peak temperature, and energy use.</p><p>Testing also needs to cover uncertain forecasts, missing telemetry, and tasks that cannot be delayed. Flight integration and fault handling must be defined for each spacecraft.</p><p class="section-note">Related products</p><div class="related-products"><a href="../heatbank/">HeatBank</a><a href="../orbitbench/">OrbitBench</a></div></div></div></section>
-  <section class="product-contact"><div class="container"><div><h2>Discuss OrbitPilot with our team</h2><p>Share your workload profile, operating limits, and scheduling requirements.</p></div><a class="button button-primary" href="../../?product=OrbitPilot#contact">Contact OTIS</a></div></section>
+  <nav class="page-section-nav" aria-label="On this page"><div class="container"><a href="#features">Features</a><a href="#interface">Interface</a><a href="#integration">Integration</a><a href="#development">Development</a></div></nav>
+  <section class="section" id="features">
+    <div class="container split">
+      <div><h2>From mission inputs to a workload plan</h2><p class="section-note">Evaluate image processing, analysis, and other computing tasks whose timing can change within a mission window.</p></div>
+      <div class="detail-list">
+        <div class="detail-item"><h3>Define the mission</h3><p>Set temperature limits, battery capacity and reserve, electrical generation, and thermal conditions for each operating phase.</p></div>
+        <div class="detail-item"><h3>Schedule the work</h3><p>Give each task a release time, duration, deadline, power draw, heat load, and priority. OrbitPilot evaluates when it can run within the modeled limits.</p></div>
+        <div class="detail-item"><h3>Compare plans</h3><p>Compare OrbitPilot with an unconstrained earliest-deadline reference using the same mission inputs and physical model. Review completed tasks, peak temperature, battery reserve, and energy use.</p></div>
+        <div class="detail-item"><h3>Inspect the decisions</h3><p>Follow the workload timeline and resource traces. See which tasks remain unscheduled, why they were excluded, and where a modeled resource limit is exceeded.</p></div>
+        <div class="detail-item"><h3>Keep the results</h3><p>Import and export mission scenarios as JSON. Save full comparison results as JSON or export time-series traces as CSV for further analysis.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="interface">
+    <div class="container">
+      <div class="section-heading"><h2>See the plan and its limits</h2><p class="section-note">Screenshots from OrbitPilot v0.1 running a synthetic mission. The example illustrates the software, not measured spacecraft performance.</p></div>
+      <div class="interface-grid">
+        <figure class="system-figure interface-card">
+          <div class="figure-label"><span>Temperature</span><span>Plan comparison</span></div>
+          <a href="../../images/products/orbitpilot-ui-temperature-v1.webp" target="_blank" rel="noopener" aria-label="Open the temperature comparison screenshot at full size in a new tab">
+            <img class="software-screenshot" src="../../images/products/orbitpilot-ui-temperature-v1.webp" srcset="../../images/products/orbitpilot-ui-temperature-v1-640.webp 640w, ../../images/products/orbitpilot-ui-temperature-v1.webp 846w" sizes="(max-width: 760px) calc(100vw - 40px), 46vw" alt="OrbitPilot and reference temperature traces shown against the configured temperature limit" width="846" height="327" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Compare predicted temperature with the configured limit throughout the mission.</figcaption>
+        </figure>
+        <figure class="system-figure interface-card">
+          <div class="figure-label"><span>Battery</span><span>Energy budget</span></div>
+          <a href="../../images/products/orbitpilot-ui-battery-v1.webp" target="_blank" rel="noopener" aria-label="Open the battery comparison screenshot at full size in a new tab">
+            <img class="software-screenshot" src="../../images/products/orbitpilot-ui-battery-v1.webp" srcset="../../images/products/orbitpilot-ui-battery-v1-640.webp 640w, ../../images/products/orbitpilot-ui-battery-v1.webp 846w" sizes="(max-width: 760px) calc(100vw - 40px), 46vw" alt="OrbitPilot and reference battery energy traces with the configured reserve threshold" width="846" height="356" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Track battery energy and reserve. A negative reference value identifies an energy deficit in the proposed workload.</figcaption>
+        </figure>
+        <figure class="system-figure interface-card interface-card-wide">
+          <div class="figure-label"><span>Workloads</span><span>Task timing</span></div>
+          <a href="../../images/products/orbitpilot-ui-schedule-v1.webp" target="_blank" rel="noopener" aria-label="Open the workload schedule screenshot at full size in a new tab">
+            <img class="software-screenshot" src="../../images/products/orbitpilot-ui-schedule-v1.webp" srcset="../../images/products/orbitpilot-ui-schedule-v1-640.webp 640w, ../../images/products/orbitpilot-ui-schedule-v1.webp 846w" sizes="(max-width: 760px) calc(100vw - 40px), 92vw" alt="Workload timeline comparing task start times and durations in OrbitPilot and the reference schedule" width="846" height="307" loading="lazy" decoding="async">
+          </a>
+          <figcaption>Compare when tasks run and how computing time is allocated in each plan.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="integration">
+    <div class="container split">
+      <div><h2>Use it in your existing workflow</h2><p class="section-note">The same planning model is available through the interface and programmatic tools.</p></div>
+      <div>
+        <ul class="requirements">
+          <li><strong>Browser interface.</strong> Edit scenarios, run comparisons, and inspect results through a local OrbitPilot server.</li>
+          <li><strong>Windows application.</strong> A bundled launcher includes the runtime and opens the planner in your browser.</li>
+          <li><strong>Command line.</strong> Validate scenarios and run simulations or comparisons in batch workflows.</li>
+          <li><strong>Python SDK.</strong> Call the planner directly from Python applications and analysis tools.</li>
+          <li><strong>REST API.</strong> Submit the same mission scenarios over HTTP and receive structured JSON results.</li>
+          <li><strong>Container configuration.</strong> A supplied Docker configuration supports evaluating managed deployments.</li>
+        </ul>
+        <p class="section-note">The installed application runs locally without a cloud account. Windows is verified; macOS, Linux, and container execution remain pending validation.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="development">
+    <div class="container split">
+      <div><h2>Built for ground evaluation</h2><p class="section-note">Current release: v0.1</p></div>
+      <div class="prose">
+        <p>OrbitPilot currently models one compute lane, one thermal node, and one battery. Tasks run at fixed power without overlap or interruption. Environment conditions are supplied by the user.</p>
+        <p>The release is a working planning prototype. Its simplified thermal and electrical models need spacecraft-specific calibration. Onboard control, hardware interfaces, and flight qualification remain future work.</p>
+        <p>We are seeking mission and payload teams with computing workloads to evaluate. Share your task profiles, operating limits, and mission conditions to help define a relevant test case.</p>
+        <p class="section-note">Related products</p><div class="related-products"><a href="../heatbank/">HeatBank</a><a href="../orbitbench/">OrbitBench</a></div>
+      </div>
+    </div>
+  </section>
+  <section class="product-contact"><div class="container"><div><h2>See OrbitPilot with our team</h2><p>Walk through the planner and discuss your mission requirements.</p></div><a class="button button-primary" href="../../?product=OrbitPilot#contact">Request a demo</a></div></section>
 </main>
 <footer class="site-footer">
   <div class="container">
