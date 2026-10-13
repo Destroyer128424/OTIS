@@ -5,8 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
-<title>OTIS — Modular Thermal Intelligence</title>
-<meta content="OTIS develops compact thermal infrastructure that enables higher-power orbital payloads within constrained spacecraft area." name="description"/>
+<title>OTIS Space — Thermal Systems for Orbital Compute</title>
+<meta content="OTIS Space is developing modular thermal hardware and control software to help spacecraft do more useful work within their power, mass, and temperature limits." name="description"/>
 <meta content="index,follow" name="robots"/>
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -365,42 +365,6 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
-    }
-
-    /* ── STATS BAR ───────────────────────────────────────── */
-    #stats {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--deep);
-      padding: 3rem 4vw;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px;
-    }
-    .stat-item {
-      padding: 1.5rem 2rem;
-      border-right: 1px solid var(--border);
-      position: relative;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.2rem;
-      line-height: 1;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--muted);
-      margin-top: 0.4rem;
-    }
-    .stat-desc {
-      font-size: 0.82rem; color: var(--muted);
-      margin-top: 0.5rem; font-weight: 300;
     }
 
     /* ── SECTION HEADER ──────────────────────────────────── */
@@ -1050,58 +1014,55 @@
     }
 
 
-    /* ── PUBLIC METRICS / DISCLOSURE CONTROL ───────────── */
-    .stats-disclaimer {
-      grid-column: 1 / -1;
-      padding: 1.1rem 2rem 0;
-      font-size: 0.76rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      letter-spacing: 0.02em;
+    /* ── MISSION AND PRODUCT ROADMAP ────────────────────── */
+    :root { --muted: #96a1b0; }
+    section[id] { scroll-margin-top: 72px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--orange-2); outline-offset: 5px; }
+    #hero { min-height: 100svh; padding-top: 130px; }
+    .hero-sub { max-width: 570px; }
+    .focus-grid {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 2.5rem 4vw; background: var(--deep);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
-
-    .metric-status {
-      display: inline-block;
-      margin-top: 0.8rem;
-      padding: 4px 9px;
-      border: 1px solid rgba(240,128,48,0.28);
-      color: var(--orange-2);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-
-    .performance-callout {
-      margin: 0 4vw 1.5rem;
-      padding: 1.2rem 1.4rem;
-      background: var(--grad-soft);
-      border: 1px solid var(--border);
-      font-size: 0.85rem;
-      color: var(--text);
-    }
-
-    .performance-callout strong { color: var(--white); font-weight: 500; }
-
-    .metric-highlight {
-      color: var(--orange-2);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-
-  
-
-    /* ── STREAMLINED PUBLIC PAGE ─────────────────────────── */
-    #stats { grid-template-columns: repeat(3, 1fr); }
-    #stats .stat-item:nth-child(3) { border-right: none; }
-    .about-grid { grid-template-columns: repeat(3, 1fr); }
+    .focus-item { padding: 1rem 2rem; border-right: 1px solid var(--border); }
+    .focus-item:last-child { border-right: 0; }
+    .focus-item h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 500; color: var(--white); }
+    .focus-item p { font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem; }
+    .about-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     #advantage { padding-bottom: 7rem; }
-    .advantage-grid { grid-template-columns: repeat(2, 1fr); }
+    .advantage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .product-cards { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .product-card { grid-column: span 2; }
+    .product-card:nth-last-child(-n+2) { grid-column: span 3; }
+    .product-card h3 { font-size: 1.8rem; }
+    .product-card .product-purpose { color: var(--white); font-size: 1rem; font-weight: 500; margin-bottom: 0.8rem; }
+    .product-card-tag { color: var(--orange-2); line-height: 1.7; }
+    .roadmap-note { margin: 1.5rem 4vw 0; max-width: 800px; color: var(--muted); font-size: 0.85rem; }
+    .contact-email { margin-top: 1.25rem; }
+    .contact-email a { color: var(--orange-2); text-underline-offset: 4px; }
+    @media (max-width: 1000px) {
+      .product-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .product-card, .product-card:nth-last-child(-n+2) { grid-column: auto; }
+      .product-card:last-child { grid-column: 1 / -1; }
+      .about-card { padding: 2rem 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      .about-grid, .advantage-grid { grid-template-columns: 1fr; }
+      .about-card { border-right: 0; border-bottom: 1px solid var(--border); }
+      .focus-item { padding: 1rem; }
+    }
+    @media (max-width: 640px) {
+      #hero { padding-top: 120px; }
+      .focus-grid { grid-template-columns: 1fr; padding: 1.5rem 5vw; }
+      .focus-item { border-right: 0; border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
+      .focus-item:last-child { border-bottom: 0; }
+      .product-cards { grid-template-columns: 1fr; }
+      .product-card { padding: 2.2rem 1.5rem; }
+      .roadmap-note { margin-left: 5vw; margin-right: 5vw; }
+    }
 </style>
-</link></head>
+</head>
 <body>
 <!-- Custom cursor -->
 <div class="cursor" id="cursor">
@@ -1115,7 +1076,7 @@
 <a class="nav-logo" href="#hero">
 <img alt="OTIS icon" src="otis_logo_icon.png"/>
 <div class="nav-logo-text">
-      OTIS
+      OTIS Space
       <span>Orbital Thermal Intelligence Systems</span>
 </div>
 </a>
@@ -1124,60 +1085,123 @@
 <span></span>
 <span></span>
 </button>
-<div class="mobile-menu" id="mobileMenu">
-<div class="mobile-menu-inner"><a href="#about">Mission Constraint</a><a href="#advantage">Why OTIS</a><a href="#founders">Team</a><a class="mobile-menu-cta" href="#contact">Request Briefing</a></div>
+<div class="mobile-menu" id="mobileMenu" inert="">
+<div class="mobile-menu-inner"><a href="#about">Mission</a><a href="#products">Product Roadmap</a><a href="#advantage">Our Approach</a><a href="#founders">Team</a><a class="mobile-menu-cta" href="#contact">Discuss Your Mission</a></div>
 </div>
 </nav>
 <!-- ── HERO ────────────────────────────────────────────── -->
+<main>
 <section id="hero">
-<div class="hero-bg-glow"></div>
-<div class="hero-ring">
-<div class="ring-sweep"></div>
-<div class="ring-sweep-2"></div>
-</div>
-<h1 class="hero-title">
-    Modular<br/>
-<span class="gradient-word">Thermal</span><br/>
-    Intelligence
-</h1>
-<p class="hero-sub">OTIS is developing compact thermal infrastructure that enables higher-power orbital payloads within tighter spacecraft area, mass, and integration constraints.</p>
-<div class="hero-actions">
-<a class="btn-primary" href="#advantage">Why OTIS</a>
-<a class="btn-ghost" href="#contact">
-<svg fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-      Request Confidential Briefing
-    </a>
-</div>
-<div class="hero-scroll-hint">Scroll to explore</div>
+  <div class="hero-bg-glow" aria-hidden="true"></div>
+  <div class="hero-ring" aria-hidden="true"><div class="ring-sweep"></div><div class="ring-sweep-2"></div></div>
+  <p class="hero-eyebrow">Thermal hardware + control software</p>
+  <h1 class="hero-title">More useful<br/><span class="gradient-word">compute.</span><br/>Every orbit.</h1>
+  <p class="hero-sub">OTIS Space is developing modular thermal hardware and control software to help spacecraft do more useful work within their power, mass, and temperature limits.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#products">Explore the Roadmap</a>
+    <a class="btn-ghost" href="#contact"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>Discuss Your Mission</a>
+  </div>
+  <div class="hero-scroll-hint" aria-hidden="true">Scroll to explore</div>
 </section>
-<!-- ── STATS ────────────────────────────────────────────── -->
-<section class="reveal" id="stats"><div class="stat-item"><div class="stat-num">800</div><div class="stat-label">W/m² High-Density Target</div><div class="stat-desc">Modeled useful payload heat rejection in the current high-density operating concept</div></div><div class="stat-item"><div class="stat-num">≈45%</div><div class="stat-label">Less Radiator Area</div><div class="stat-desc">Modeled reduction at equal payload heat versus a representative compact passive baseline</div></div><div class="stat-item"><div class="stat-num">Multi-kW</div><div class="stat-label">Scalable Thermal Platform</div><div class="stat-desc">Designed to scale from compact spacecraft surfaces to larger deployable rejection systems</div></div><div class="stats-disclaimer">Modeled design targets; mission results vary with operating conditions and system integration.</div></section>
-<!-- ── ABOUT / PROBLEM ─────────────────────────────────── -->
+
+<section class="focus-grid reveal" aria-label="Our focus">
+  <div class="focus-item"><h2>Compute</h2><p>More useful work within mission limits.</p></div>
+  <div class="focus-item"><h2>Coordinate</h2><p>Thermal capacity, power, and workload timing.</p></div>
+  <div class="focus-item"><h2>Validate</h2><p>Performance measured against real mission needs.</p></div>
+</section>
+
+<!-- ── MISSION ─────────────────────────────────────────── -->
 <section id="about">
-<div class="section-header reveal"><div class="section-eyebrow">The Mission Constraint</div><h2 class="section-title">Thermal capacity is becoming<br/>a mission constraint</h2><p class="section-body">As onboard processing grows, heat rejection increasingly determines payload capability, spacecraft size, and mission complexity.</p></div>
-<div class="about-grid"><div class="about-card reveal"><div class="about-card-icon"><svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="18" stroke="#2b8fd4" stroke-width="1.2"></circle><path d="M24 6 A18 18 0 0 1 42 24" stroke="#f08030" stroke-linecap="round" stroke-width="1.5"></path><circle cx="24" cy="24" fill="#2b8fd4" opacity="0.8" r="3"></circle></svg></div><h3>Limited Surface Area</h3><p>Body-mounted radiator area is finite, while deployable systems add mechanisms, stowed volume, and structural burden.</p></div><div class="about-card reveal"><div class="about-card-icon"><svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M13 34h22M16 29h16M19 24h10M22 19h4" stroke="#f08030" stroke-linecap="round" stroke-width="1.5"></path><rect height="32" rx="2" stroke="#2b8fd4" stroke-width="1.2" width="30" x="9" y="8"></rect></svg></div><h3>Rising Payload Density</h3><p>More capable processors concentrate greater heat in smaller volumes, turning thermal capacity into a practical performance ceiling.</p></div><div class="about-card reveal"><div class="about-card-icon"><svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M10 34 L24 10 L38 34 Z" stroke="#2b8fd4" stroke-width="1.2"></path><path d="M18 28h12" stroke="#f08030" stroke-linecap="round" stroke-width="1.5"></path></svg></div><h3>Mission-Level Tradeoffs</h3><p>Thermal gains must justify their electrical power, mass, integration, and reliability costs at the spacecraft level.</p></div></div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Our Mission</div>
+    <h2 class="section-title">Make high-performance<br/>computing practical in space.</h2>
+    <p class="section-body">A capable processor is only useful when the spacecraft can power it and manage its heat. We are building toward thermal systems that coordinate heat storage, heat flow, and workload timing—starting with demanding onboard processors.</p>
+  </div>
+  <div class="about-grid">
+    <article class="about-card reveal"><div class="section-eyebrow">The Workload</div><h3>Useful work, on time</h3><p>Processing, imaging, and communications create changing demands. Thermal limits can determine when a payload runs and how long it stays active.</p></article>
+    <article class="about-card reveal"><div class="section-eyebrow">The Orbit</div><h3>Changing conditions</h3><p>Sunlight, spacecraft orientation, and battery state change through a mission. Cooling and computing decisions need to account for those conditions together.</p></article>
+    <article class="about-card reveal"><div class="section-eyebrow">The System</div><h3>Every trade counts</h3><p>Added cooling capability must earn its place in the spacecraft's mass, power, and integration budgets. Our focus is the useful work the whole system can deliver.</p></article>
+  </div>
 </section>
 <div class="gradient-rule"></div>
-<!-- ── ARCHITECTURE ─────────────────────────────────────── -->
 
-<!-- ── CAPABILITIES ─────────────────────────────────────── -->
+<!-- ── PRODUCT ROADMAP ─────────────────────────────────── -->
+<section id="products">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Product Roadmap · In Development</div>
+    <h2 class="section-title">Five product lines.<br/>One connected platform.</h2>
+    <p class="section-body">Our initial focus pairs thermal buffering with orbit-aware control. The roadmap extends to heat routing, integrated cooling assemblies, and the tools to test them. We are seeking design and test partners to shape requirements and validate performance.</p>
+  </div>
+  <div class="product-cards">
+    <article class="product-card reveal">
+      <div class="product-card-accent"></div>
+      <div class="product-card-tag">01 / Software · Initial Focus</div>
+      <h3>OrbitPilot</h3>
+      <p class="product-purpose">Coordinate compute, power, and heat.</p>
+      <p>Planned onboard control software to schedule flexible workloads around temperatures, battery state, orbital conditions, and task deadlines.</p>
+      <ul class="product-card-list"><li>Workload and thermal-state coordination</li><li>Ground replay and onboard integration</li><li>For compute suppliers and spacecraft teams</li></ul>
+    </article>
+    <article class="product-card reveal">
+      <div class="product-card-accent"></div>
+      <div class="product-card-tag">02 / Hardware · Initial Focus</div>
+      <h3>HeatBank</h3>
+      <p class="product-purpose">Buffer demanding payload bursts.</p>
+      <p>Planned sealed thermal-storage cartridges to absorb temporary excess heat and release it when cooling capacity is available again.</p>
+      <ul class="product-card-list"><li>Phase-change storage with sensing</li><li>Defined thermal and mechanical interfaces</li><li>For intermittent processing and payload loads</li></ul>
+    </article>
+    <article class="product-card reveal">
+      <div class="product-card-accent"></div>
+      <div class="product-card-tag">03 / Component · Future Development</div>
+      <h3>HeatRoute</h3>
+      <p class="product-purpose">Control where heat goes.</p>
+      <p>Proposed switches and routing modules to connect or isolate heat paths between equipment, thermal storage, and radiators as mission needs change.</p>
+      <ul class="product-card-list"><li>Controllable thermal connections</li><li>Operating-state feedback</li><li>For payload and thermal-system developers</li></ul>
+    </article>
+    <article class="product-card reveal">
+      <div class="product-card-accent"></div>
+      <div class="product-card-tag">04 / Subsystem · Future Development</div>
+      <h3>ThermalCore</h3>
+      <p class="product-purpose">Bring the thermal system together.</p>
+      <p>A planned integrated cooling assembly combining heat collection, transport, optional storage, sensors, and control around a customer's compute payload.</p>
+      <ul class="product-card-list"><li>Cold plate to radiator interface</li><li>Hardware and controls in one assembly</li><li>For satellite and hosted-payload integrators</li></ul>
+    </article>
+    <article class="product-card reveal">
+      <div class="product-card-accent"></div>
+      <div class="product-card-tag">05 / Test Tools · Development Platform</div>
+      <h3>OrbitBench</h3>
+      <p class="product-purpose">Measure what a mission can sustain.</p>
+      <p>Planned test fixtures and software for replaying workload and thermal conditions, measuring operating limits, and comparing designs before flight.</p>
+      <ul class="product-card-list"><li>Instrumented workload and thermal testing</li><li>Repeatable evaluations and model correlation</li><li>For payload teams and test partners</li></ul>
+    </article>
+  </div>
+  <p class="roadmap-note">These product lines are in development. Specifications, availability, and mission suitability will be established through testing with partners.</p>
+</section>
+<div class="gradient-rule"></div>
+
+<!-- ── APPROACH ────────────────────────────────────────── -->
 <section id="advantage">
-<div class="section-header reveal"><div class="section-eyebrow">Why OTIS</div><h2 class="section-title">A better<br/>system-level trade</h2><p class="section-body">OTIS is designed to increase useful thermal capacity while preserving the flexibility, integration simplicity, and resilience required by real spacecraft missions.</p></div>
-<div class="cap-grid advantage-grid"><div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)"><div class="cap-card-glow"></div><div class="cap-number">01</div><div class="cap-icon"><svg fill="none" stroke="#2b8fd4" stroke-width="1.3" viewbox="0 0 24 24"><path d="M4 17l5-5 4 3 7-9"></path><path d="M15 6h5v5"></path></svg></div><h3>Preserve Spacecraft Area</h3><p>Increase payload capability without growing thermal hardware at the same rate as heat load.</p></div><div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)"><div class="cap-card-glow"></div><div class="cap-number">02</div><div class="cap-icon"><svg fill="none" stroke="#f08030" stroke-width="1.3" viewbox="0 0 24 24"><path d="M13 2L5 13h7l-1 9 8-12h-7z"></path></svg></div><h3>Use Power Intelligently</h3><p>Match thermal-system energy use to actual mission demand rather than operating permanently at peak conditions.</p></div><div class="cap-card reveal" style="--glow-color: rgba(43,143,212,0.08)"><div class="cap-card-glow"></div><div class="cap-number">03</div><div class="cap-icon"><svg fill="none" stroke="#2b8fd4" stroke-width="1.3" viewbox="0 0 24 24"><path d="M3 7h18M3 12h18M3 17h18"></path></svg></div><h3>Scale with the Mission</h3><p>Extend from compact body-mounted capacity to larger modular and deployable rejection systems.</p></div><div class="cap-card reveal" style="--glow-color: rgba(212,98,10,0.08)"><div class="cap-card-glow"></div><div class="cap-number">04</div><div class="cap-icon"><svg fill="none" stroke="#f08030" stroke-width="1.3" viewbox="0 0 24 24"><rect x="3" y="5" width="7" height="6" rx="1"></rect><rect x="14" y="5" width="7" height="6" rx="1"></rect><rect x="8.5" y="14" width="7" height="6" rx="1"></rect><path d="M6.5 11v2h5.5M17.5 11v2H12M12 13v1"></path></svg></div><h3>Simplify Integration</h3><p>A modular thermal interface is designed to adapt across spacecraft sizes, payload classes, and mission profiles.</p></div></div>
+  <div class="section-header reveal">
+    <div class="section-eyebrow">Our Approach</div>
+    <h2 class="section-title">Build around<br/>the mission.</h2>
+    <p class="section-body">Shared sensing, control models, and interfaces connect our roadmap. Each step starts with a specific mission constraint and a measurable test.</p>
+  </div>
+  <div class="cap-grid advantage-grid">
+    <article class="cap-card reveal"><div class="cap-number" aria-hidden="true">01</div><h3>Start with the workload</h3><p>Understand what the payload needs to accomplish, its deadlines, and where thermal or power limits restrict operation.</p></article>
+    <article class="cap-card reveal"><div class="cap-number" aria-hidden="true">02</div><h3>Coordinate the full cycle</h3><p>Account for heat generation, storage, and eventual rejection alongside available electrical power. Thermal storage shifts heat in time; it still has to discharge.</p></article>
+    <article class="cap-card reveal"><div class="cap-number" aria-hidden="true">03</div><h3>Design for integration</h3><p>Develop reusable modules and defined interfaces around customer equipment, with a path from evaluation to an integrated subsystem.</p></article>
+    <article class="cap-card reveal"><div class="cap-number" aria-hidden="true">04</div><h3>Prove the system benefit</h3><p>Compare completed work, operating limits, mass, and energy use against existing approaches under the same mission conditions.</p></article>
+  </div>
 </section>
 <div class="gradient-rule"></div>
-<!-- ── PERFORMANCE TABLE ───────────────────────────────── -->
-
-<!-- ── PRODUCT FAMILY ────────────────────────────────────── -->
 
 <!-- ── FOUNDERS ─────────────────────────────────────────── -->
 <section id="founders">
-<div class="section-header reveal"><div class="section-eyebrow">Team</div><h2 class="section-title">Building infrastructure<br/>for orbital compute</h2><p class="section-body">OTIS combines spacecraft engineering, thermal systems, and high-performance hardware integration.</p></div>
+<div class="section-header reveal"><div class="section-eyebrow">Team</div><h2 class="section-title">Building infrastructure<br/>for orbital compute</h2><p class="section-body">Founded by two MIT seniors in electrical and aerospace engineering, OTIS Space is developing thermal systems for demanding onboard computing. We are seeking collaborators and test partners to turn mission needs into validated hardware and software.</p></div>
 <div class="founders-grid">
 <div class="founder-card reveal">
 <div class="founder-card-accent"></div>
 <div class="founder-photo">
-  <div class="founder-photo-placeholder"><strong>Add founder photo</strong><span>images/brady-cruse.jpg</span></div>
+  <div class="founder-photo-placeholder" aria-hidden="true"><strong>Brady Cruse</strong></div>
   <img src="images/brady-cruse.jpg" alt="Brady Cruse" loading="lazy" onerror="this.remove()"/>
 </div>
 <div class="founder-role">Co-Founder</div>
@@ -1187,20 +1211,20 @@
 <div class="founder-card reveal">
 <div class="founder-card-accent"></div>
 <div class="founder-photo">
-  <div class="founder-photo-placeholder"><strong>Add founder photo</strong><span>images/daniel-cruse_new.jpg</span></div>
-  <img src="images/daniel-cruse.jpg" alt="Daniel Cruse" loading="lazy" onerror="this.remove()"/>
+  <div class="founder-photo-placeholder" aria-hidden="true"><strong>Daniel Cruse</strong></div>
+  <img src="images/daniel-cruse_new.jpg" alt="Daniel Cruse" loading="lazy" onerror="this.remove()"/>
 </div>
 <div class="founder-role">Co-Founder</div>
 <h3>Daniel Cruse</h3>
-<p>Daniel is a forth-year MIT undergraduate studying aerospace engineering, focused on spacecraft systems and the practical constraints of operating high-power payloads in orbit.</p>
+<p>Daniel is a fourth-year MIT undergraduate studying aerospace engineering, focused on spacecraft systems and the practical constraints of operating high-power payloads in orbit.</p>
 </div>
 </div>
 </section>
 <!-- ── CONTACT ───────────────────────────────────────────── -->
 <section id="contact">
-<div class="contact-text reveal"><h2>Designing a<br/>high-power mission?</h2><p>OTIS works with satellite integrators, hosted-payload providers, mission architects, and strategic partners. Qualified teams can request a confidential technical briefing.</p></div>
+<div class="contact-text reveal"><div class="section-eyebrow">Build With Us</div><h2>What could your<br/>payload do next?</h2><p>We are looking for spacecraft teams with demanding compute or payload needs, collaborators with test capabilities, and investors who share our mission. Tell us what you are building and where thermal limits get in the way.</p><p class="contact-email">Prefer email? <a href="mailto:bcruse@mit.edu">bcruse@mit.edu</a></p></div>
 <form action="https://formspree.io/f/xwvzaraa" class="contact-form reveal" id="briefingForm" method="POST">
-<input name="_subject" type="hidden" value="New OTIS Confidential Briefing Request"/>
+<input name="_subject" type="hidden" value="New OTIS Mission or Partnership Inquiry"/>
 <input autocomplete="off" class="form-honeypot" name="_gotcha" tabindex="-1" type="text"/>
 <div class="form-row">
 <div class="form-group">
@@ -1223,33 +1247,36 @@
 </div>
 </div>
 <div class="form-group">
-<label for="missionType">Mission Profile</label>
+<label for="missionType">Mission or Interest</label>
 <select id="missionType" name="mission_type" required="">
-<option disabled="" selected="" value="">Select mission profile</option>
+<option disabled="" selected="" value="">Select mission or interest</option>
 <option>CubeSat / SmallSat</option>
 <option>Hosted Payload</option>
 <option>Orbital Compute</option>
 <option>Commercial Remote Sensing</option>
 <option>Government / Defense</option>
 <option>Research / Academic</option>
+<option>Test / Development Partnership</option>
+<option>Investment / Strategic Partnership</option>
 <option>Other</option>
 </select>
 </div>
 <div class="form-group">
-<label for="message">Mission Need</label>
-<textarea id="message" name="message" placeholder="Share the approximate payload heat load, spacecraft class, timeline, and integration constraints…" required=""></textarea>
+<label for="message">How Can We Work Together?</label>
+<textarea id="message" name="message" placeholder="Tell us about your mission, workload, timeline, or partnership interest…" required=""></textarea>
 </div>
-<button class="form-submit" id="briefingSubmit" type="submit">Request Confidential Briefing →</button>
+<button class="form-submit" id="briefingSubmit" type="submit">Start a Conversation →</button>
 <p aria-live="polite" class="form-status" id="formStatus"></p>
 </form>
 </section>
+</main>
 <!-- ── FOOTER ────────────────────────────────────────────── -->
 <footer>
 <div class="footer-logo">
 <img alt="OTIS" src="otis_logo_icon.png"/>
 <span class="footer-tagline">Orbital Thermal Intelligence Systems</span>
 </div>
-<ul class="footer-links"><li><a href="#about">Mission</a></li><li><a href="#advantage">Why OTIS</a></li><li><a href="#founders">Team</a></li><li><a href="#contact">Contact</a></li></ul>
+<ul class="footer-links"><li><a href="#about">Mission</a></li><li><a href="#products">Products</a></li><li><a href="#advantage">Approach</a></li><li><a href="#founders">Team</a></li><li><a href="#contact">Contact</a></li></ul>
 <div class="footer-copy">© 2026 Orbital Thermal Intelligence Systems. All rights reserved.</div>
 </footer>
 <script>
@@ -1342,6 +1369,9 @@
     mobileMenu.classList.remove('open');
     menuToggle.classList.remove('active');
     menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open navigation menu');
+    if (mobileMenu.contains(document.activeElement)) menuToggle.focus();
+    mobileMenu.inert = true;
     document.body.classList.remove('menu-open');
   }
 
@@ -1349,6 +1379,8 @@
     mobileMenu.classList.add('open');
     menuToggle.classList.add('active');
     menuToggle.setAttribute('aria-expanded', 'true');
+    menuToggle.setAttribute('aria-label', 'Close navigation menu');
+    mobileMenu.inert = false;
     document.body.classList.add('menu-open');
   }
 
@@ -1391,7 +1423,7 @@
       const formEndpoint = briefingForm.getAttribute('action');
 
       if (!formEndpoint || formEndpoint.includes('YOUR_FORM_ID')) {
-        formStatus.textContent = 'Formspree is not connected yet. Replace YOUR_FORM_ID with your real Formspree endpoint.';
+        formStatus.textContent = 'The form is temporarily unavailable. Please email bcruse@mit.edu directly.';
         formStatus.className = 'form-status error';
         return;
       }
@@ -1410,7 +1442,7 @@
 
         if (response.ok) {
           briefingForm.reset();
-          formStatus.textContent = 'Confidential briefing request sent. We will follow up shortly.';
+          formStatus.textContent = 'Thank you for reaching out. The OTIS team will follow up by email.';
           formStatus.className = 'form-status success';
         } else {
           const data = await response.json().catch(() => ({}));
@@ -1425,7 +1457,7 @@
         formStatus.className = 'form-status error';
       } finally {
         briefingSubmit.disabled = false;
-        briefingSubmit.textContent = 'Request Confidential Briefing →';
+        briefingSubmit.textContent = 'Start a Conversation →';
       }
     });
   }
